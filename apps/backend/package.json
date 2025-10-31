@@ -1,0 +1,55 @@
+{
+    "name": "backend",
+    "version": "1.0.0",
+    "description": "Backend for SnippetVault - an app for managing code snippets",
+    "main": "index.js",
+    "scripts": {
+        "dev": "tsx watch src/server.ts",
+        "build": "tsc",
+        "start": "node dist/index.js",
+        "lint:check": "eslint 'src/**/*'",
+        "lint:fix": "eslint 'src/**/*' --fix",
+        "format": "prettier --write ."
+    },
+    "author": "Arun Bohra",
+    "license": "ISC",
+    "type": "module",
+    "engines": {
+        "node": ">=22.15.0",
+        "npm": ">=11.4.1"
+    },
+    "dependencies": {
+        "@react-email/render": "^1.1.3",
+        "bcryptjs": "^3.0.2",
+        "cookie-parser": "^1.4.7",
+        "dotenv": "^16.5.0",
+        "express": "^5.1.0",
+        "helmet": "^8.1.0",
+        "inversify": "^7.0.0-alpha.5",
+        "jsonwebtoken": "^9.0.2",
+        "mailgun.js": "^12.0.3",
+        "razorpay": "^2.9.6",
+        "react": "^19.1.0",
+        "react-dom": "^19.1.0",
+        "reflect-metadata": "^0.2.2",
+        "validator": "^13.15.20"
+    },
+    "devDependencies": {
+        "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+        "@types/cookie-parser": "^1.4.9",
+        "@types/express": "^5.0.3",
+        "@types/jsonwebtoken": "^9.0.9",
+        "@types/node": "^24.0.1",
+        "@types/react": "^19.1.8",
+        "@types/react-dom": "^19.1.6",
+        "@types/validator": "^13.15.4",
+        "@typescript-eslint/eslint-plugin": "^8.34.0",
+        "@typescript-eslint/parser": "^8.34.0",
+        "eslint": "^9.29.0",
+        "eslint-config-prettier": "^10.1.5",
+        "eslint-plugin-prettier": "^5.4.1",
+        "prettier": "^3.5.3",
+        "tsx": "^4.20.3",
+        "typescript": "^5.8.3"
+    }
+}
