@@ -3,6 +3,7 @@ import { inject, injectable } from 'inversify';
 import { getEnv } from '@config/env';
 
 import { catchAsync } from '@shared/utils/catchAsync/catchAsync';
+import { AppError } from '@shared/utils/errors/appError';
 import { ResponseHandler } from '@shared/utils/responseHandler/responseHandler';
 
 import { TYPES } from '@api/di/types';
@@ -63,6 +64,40 @@ export class UserController {
 
         ResponseHandler.success(res, {
             message: 'Logout successful',
+            statusCode: 200,
+        });
+    });
+
+    verifyEmail = catchAsync(async (req, res) => {
+        const { token } = req.query;
+
+        if (!token || typeof token !== 'string') {
+            throw new AppError({
+                message: 'Verification token is required',
+                statusCode: 400,
+            });
+        }
+
+        await this.userService.verifyUser(token);
+
+        ResponseHandler.success(res, {
+            message: 'Email verified successfully',
+            statusCode: 200,
+        });
+    });
+
+    regenerateVerificationToken = catchAsync(async (req, res) => {
+        if (!req.user) {
+            throw new AppError({
+                message: 'User not authenticated',
+                statusCode: 401,
+            });
+        }
+
+        await this.userService.regenerateVerificationToken(req.user._id.toString());
+
+        ResponseHandler.success(res, {
+            message: 'Verification email sent successfully',
             statusCode: 200,
         });
     });

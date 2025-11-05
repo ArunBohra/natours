@@ -4,11 +4,11 @@ import Mailgun from 'mailgun.js';
 import { getEnv } from '@config/env';
 
 import {
-    MailgunServicePort,
+    EmailProviderPort,
     SendEmailOptions,
 } from '@shared/services/email/mailgun/mailgunServicePort';
 
-export class MailgunService implements MailgunServicePort {
+export class MailgunService implements EmailProviderPort {
     private readonly mailgunDomain = getEnv('MAILGUN_DOMAIN');
     private readonly mailgunApiKey = getEnv('MAILGUN_SENDING_KEY');
 

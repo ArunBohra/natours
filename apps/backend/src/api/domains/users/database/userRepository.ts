@@ -20,6 +20,10 @@ export class UserRepository implements UserRepositoryPort {
         return await userModel.findOne({ email });
     }
 
+    async findUserByVerificationToken(token: string) {
+        return await userModel.findOne({ verificationToken: token });
+    }
+
     async updateUser(userId: string, updateData: Partial<IUser>) {
         return await userModel.findByIdAndUpdate(new Types.ObjectId(userId), updateData, {
             new: true,

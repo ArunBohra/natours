@@ -33,6 +33,10 @@ const userSchema = new Schema({
         type: String,
         required: false,
     },
+    verificationTokenExpiresAt: {
+        type: Date,
+        required: false,
+    },
     resetPasswordToken: {
         type: String,
         required: false,
@@ -58,6 +62,7 @@ export interface IUser {
     image?: string;
     verified?: boolean;
     verificationToken?: string;
+    verificationTokenExpiresAt?: Date;
     resetPasswordToken?: string;
 }
 

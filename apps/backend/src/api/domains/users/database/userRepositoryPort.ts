@@ -7,6 +7,7 @@ export interface UserRepositoryPort {
     createUser: (userData: IUser) => Promise<HydratedDocument<IUserDocument>>;
     findUserById: (userId: string) => Promise<HydratedDocument<IUserDocument> | null>;
     findUserByEmail: (email: string) => Promise<HydratedDocument<IUserDocument> | null>;
+    findUserByVerificationToken: (token: string) => Promise<HydratedDocument<IUserDocument> | null>;
     updateUser: (
         userId: string,
         userData: Partial<IUser>,

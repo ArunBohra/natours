@@ -1,6 +1,7 @@
 import { Router } from 'express';
 
 import { ServiceLocator } from '@api/di/serviceLocator';
+import { authenticate } from '@api/middlewares/auth/authenticate';
 import { validateRequest } from '@api/middlewares/validator/validateRequest';
 import { userLoginSchema, userSignupSchema } from '@api/routes/user/userSchemas';
 
@@ -23,3 +24,11 @@ userRouter.post(
 );
 
 userRouter.post('/logout', controllers.userController.logout);
+
+userRouter.get('/verify-email', controllers.userController.verifyEmail);
+
+userRouter.post(
+    '/regenerate-verification',
+    authenticate,
+    controllers.userController.regenerateVerificationToken,
+);

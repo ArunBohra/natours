@@ -6,6 +6,6 @@ export interface SendEmailOptions {
     from?: string;
 }
 
-export interface MailgunServicePort {
+export interface EmailProviderPort {
     sendEmail(data: SendEmailOptions): Promise<void>;
 }

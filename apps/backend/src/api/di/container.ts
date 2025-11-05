@@ -4,7 +4,7 @@ import 'reflect-metadata';
 import { EmailService } from '@shared/services/email/emailService';
 import { EmailServicePort } from '@shared/services/email/emailServicePort';
 import { MailgunService } from '@shared/services/email/mailgun/mailgunService';
-import { MailgunServicePort } from '@shared/services/email/mailgun/mailgunServicePort';
+import { EmailProviderPort } from '@shared/services/email/mailgun/mailgunServicePort';
 import { TemplateRenderer } from '@shared/services/email/template/templateRenderer';
 import { TemplateRendererPort } from '@shared/services/email/template/templateRendererPort';
 import { JwtPort } from '@shared/services/jwt/jwtPort';
@@ -24,7 +24,7 @@ container.bind<JwtPort>(TYPES.JWTService).to(JwtService);
 
 // Email
 container.bind<EmailServicePort>(TYPES.EmailService).to(EmailService);
-container.bind<MailgunServicePort>(TYPES.EmailProvider).to(MailgunService);
+container.bind<EmailProviderPort>(TYPES.EmailProvider).to(MailgunService);
 container.bind<TemplateRendererPort>(TYPES.TemplateRenderer).to(TemplateRenderer);
 
 // User

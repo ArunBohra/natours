@@ -31,9 +31,23 @@ export class JwtService implements JwtPort {
 
     verifyToken(token: string) {
         try {
-            const decoded = jsonwebtoken.verify(token, process.env.JWT_SECRET as string);
+            const decoded = jsonwebtoken.verify(token, this.config.secret);
             return decoded;
         } catch (err) {
+            if (err instanceof jsonwebtoken.TokenExpiredError) {
+                throw new AppError({
+                    message: 'Your session has expired. Please log in again.',
+                    statusCode: 401,
+                    type: 'user-error',
+                });
+            }
+            if (err instanceof jsonwebtoken.JsonWebTokenError) {
+                throw new AppError({
+                    message: 'Invalid session. Please log in again.',
+                    statusCode: 401,
+                    type: 'user-error',
+                });
+            }
             throw new AppError({
                 message: 'Something went wrong, please try again',
                 statusCode: 500,
