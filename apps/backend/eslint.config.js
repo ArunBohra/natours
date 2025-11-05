@@ -9,6 +9,9 @@ export default [
             ecmaVersion: 2021,
             sourceType: 'module',
             parser: tsParser,
+            ecmaFeatures: {
+                legacyDecorators: true,
+            },
             globals: {
                 require: 'readonly',
                 module: 'readonly',

@@ -1,9 +1,11 @@
 import { Response } from 'express';
 
+import { ErrorTypes } from '@shared/utils/errors/appError';
+
 interface I_SuccessResponse {
     success: true;
     message?: string;
-    data?: Record<string, unknown>;
+    data?: unknown;
     statusCode?: number;
     meta?: Record<string, unknown> | null;
 }
@@ -18,7 +20,7 @@ interface I_ErrorResponse {
     errors?: I_ErrorDetails | I_ErrorDetails[] | null;
     stack?: string | null;
     statusCode?: number;
-    errorType: string;
+    errorType: ErrorTypes;
 }
 
 type ResponseOptions = I_SuccessResponse | I_ErrorResponse;
@@ -35,7 +37,7 @@ export class ResponseHandler {
             statusCode = 200,
         }: {
             message?: string;
-            data?: Record<string, unknown>;
+            data?: unknown;
             statusCode?: number;
         } = {},
     ) {
@@ -58,13 +60,13 @@ export class ResponseHandler {
             statusCode = 500,
             errors,
             stack,
-            errorType,
+            errorType = 'unknown-error',
         }: {
             message?: string;
             statusCode?: number;
             errors?: Record<string, unknown>[] | null;
             stack?: string | null;
-            errorType: string;
+            errorType: ErrorTypes;
         },
     ) {
         const response: ResponseOptions = {

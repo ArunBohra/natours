@@ -1,7 +1,8 @@
-import { createSchema } from '@api/middlewares/validator/createValidatorSchema';
 import { NextFunction, Request, Response } from 'express';
 
 import { AppError } from '@shared/utils/errors/appError';
+
+import { createSchema } from '@api/middlewares/validator/createValidatorSchema';
 
 export const validateRequest =
     (schema: ReturnType<typeof createSchema>, source: 'body' | 'query' | 'params' = 'body') =>

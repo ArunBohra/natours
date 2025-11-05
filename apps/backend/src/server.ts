@@ -1,6 +1,6 @@
-import { initApi } from '@api/api';
-
 import { getEnv } from '@config/env';
+
+import { initApi } from '@api/api';
 
 const startServer = () => {
     try {

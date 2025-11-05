@@ -1,14 +1,11 @@
 export const TYPES = {
-    // Database
-    Database: Symbol.for('Database'),
+    // Shared Services
+    JWTService: Symbol.for('JWTService'),
+    EmailService: Symbol.for('EmailService'),
 
-    // Repositories
+    // Users
+    UserController: Symbol.for('UserController'),
     UserRepository: Symbol.for('UserRepository'),
-
-    // Domain Services
     UserService: Symbol.for('UserService'),
     AuthService: Symbol.for('AuthService'),
-
-    // Shared Services
-    EmailService: Symbol.for('EmailService'),
 } as const;

@@ -1,17 +1,19 @@
+import { Router } from 'express';
+
+import { ServiceLocator } from '@api/di/serviceLocator';
 import { validateRequest } from '@api/middlewares/validator/validateRequest';
 import { userSignupSchema } from '@api/routes/user/userSchemas';
-import { Router } from 'express';
+
+const controllers = {
+    userController: ServiceLocator.getUserController(),
+};
 
 export const userRouter = Router();
 
-userRouter.post('/signup', validateRequest(userSignupSchema, 'body'), (req, res, next) => {
-    const { body } = req;
+userRouter.post(
+    '/signup',
+    validateRequest(userSignupSchema, 'body'),
+    controllers.userController.signup,
+);
 
-    // eslint-disable-next-line
-    console.log(body);
-
-    res.send('Hello');
-    return {
-        type: '',
-    };
-});
+userRouter.post('/logout', controllers.userController.logout);

@@ -1,12 +1,13 @@
-import { createSchema } from '@api/middlewares/validator/createValidatorSchema';
 import validator from 'validator';
 
-export const userSignupSchema = createSchema({
+import { SchemaDefinition, createSchema } from '@api/middlewares/validator/createValidatorSchema';
+
+const userSignupSchemaDefinition: SchemaDefinition = {
     name: {
         required: true,
         rules: [
-            (value: string) => ({
-                status: validator.isLength(value, { min: 2 }),
+            (value) => ({
+                status: validator.isLength(value as string, { min: 2 }),
                 type: 'custom',
                 message: 'Name should be at least 3 characters long.',
             }),
@@ -15,8 +16,8 @@ export const userSignupSchema = createSchema({
     email: {
         required: true,
         rules: [
-            (value: string) => ({
-                status: validator.isEmail(value),
+            (value) => ({
+                status: validator.isEmail(value as string),
                 type: 'custom',
                 message: 'Please provide a valid email.',
             }),
@@ -25,8 +26,8 @@ export const userSignupSchema = createSchema({
     password: {
         required: true,
         rules: [
-            (value: string) => ({
-                status: validator.isStrongPassword(value, {
+            (value) => ({
+                status: validator.isStrongPassword(value as string, {
                     minLength: 8,
                     minUppercase: 0,
                     minNumbers: 0,
@@ -40,11 +41,13 @@ export const userSignupSchema = createSchema({
     confirmPassword: {
         required: true,
         rules: [
-            (value: string, data) => ({
+            (value, data) => ({
                 status: data?.password === value,
                 type: 'custom',
                 message: 'Passwords do not match.',
             }),
         ],
     },
-});
+};
+
+export const userSignupSchema = createSchema(userSignupSchemaDefinition);

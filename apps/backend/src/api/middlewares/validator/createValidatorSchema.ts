@@ -1,6 +1,6 @@
 export type ValidationRule = (
-    value: any,
-    data?: Record<string, any>,
+    value: unknown,
+    data?: Record<string, unknown>,
 ) => {
     status: boolean;
     type: 'required' | 'custom';
@@ -22,14 +22,14 @@ export type ValidationIssue = {
 
 export type ValidationResult = {
     success: boolean;
-    data?: Record<string, any>;
+    data?: Record<string, unknown>;
     error?: { issues: ValidationIssue[] };
 };
 
 export const createSchema = (definition: SchemaDefinition) => ({
-    safeParse: (data: Record<string, any> = {}): ValidationResult => {
+    safeParse: (data: Record<string, unknown> = {}): ValidationResult => {
         const issues: ValidationIssue[] = [];
-        const validatedData: Record<string, any> = {};
+        const validatedData: Record<string, unknown> = {};
 
         for (const [field, config] of Object.entries(definition)) {
             const value = data[field];
