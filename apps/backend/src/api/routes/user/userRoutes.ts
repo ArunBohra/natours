@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 import { ServiceLocator } from '@api/di/serviceLocator';
 import { validateRequest } from '@api/middlewares/validator/validateRequest';
-import { userSignupSchema, userLoginSchema } from '@api/routes/user/userSchemas';
+import { userLoginSchema, userSignupSchema } from '@api/routes/user/userSchemas';
 
 const controllers = {
     userController: ServiceLocator.getUserController(),

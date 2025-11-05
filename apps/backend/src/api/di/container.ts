@@ -1,6 +1,12 @@
 import { Container } from 'inversify';
 import 'reflect-metadata';
 
+import { EmailService } from '@shared/services/email/emailService';
+import { EmailServicePort } from '@shared/services/email/emailServicePort';
+import { MailgunService } from '@shared/services/email/mailgun/mailgunService';
+import { MailgunServicePort } from '@shared/services/email/mailgun/mailgunServicePort';
+import { TemplateRenderer } from '@shared/services/email/template/templateRenderer';
+import { TemplateRendererPort } from '@shared/services/email/template/templateRendererPort';
 import { JwtPort } from '@shared/services/jwt/jwtPort';
 import { JwtService } from '@shared/services/jwt/jwtService';
 
@@ -13,8 +19,13 @@ import { UserServicePort } from '@api/domains/users/services/userServicePort';
 
 export const container = new Container();
 
-// Shared
+// JWT
 container.bind<JwtPort>(TYPES.JWTService).to(JwtService);
+
+// Email
+container.bind<EmailServicePort>(TYPES.EmailService).to(EmailService);
+container.bind<MailgunServicePort>(TYPES.EmailProvider).to(MailgunService);
+container.bind<TemplateRendererPort>(TYPES.TemplateRenderer).to(TemplateRenderer);
 
 // User
 container.bind<UserController>(TYPES.UserController).to(UserController);
