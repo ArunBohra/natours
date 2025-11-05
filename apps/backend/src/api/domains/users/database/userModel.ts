@@ -39,6 +39,10 @@ const userSchema = new Schema({
     },
 });
 
+userSchema.methods.isPasswordCorrect = async function (candidatePassword: string) {
+    return await bcrypt.compare(candidatePassword, this.password);
+};
+
 userSchema.pre<IUserDocument>('save', async function (next) {
     if (this.isNew && this.isModified('password')) {
         const salt = await bcrypt.genSalt(10);
@@ -57,7 +61,9 @@ export interface IUser {
     resetPasswordToken?: string;
 }
 
-export interface IUserDocument extends IUser, IBaseDocument {}
+export interface IUserDocument extends IUser, IBaseDocument {
+    isPasswordCorrect: (candidatePassword: string) => Promise<boolean>;
+}
 
 interface IUserModel extends Model<IUserDocument> {}
 

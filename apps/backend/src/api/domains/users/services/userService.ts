@@ -38,5 +38,26 @@ export class UserService implements UserServicePort {
         };
     }
 
-    async loginUser() {}
+    async loginUser({ email, password }: { email: string; password: string }) {
+        const user = await this.userRepository.findUserByEmail(email.toLowerCase());
+
+        if (!user) {
+            throw new AppError({ message: 'Invalid credentials', statusCode: 401 });
+        }
+
+        const isPasswordValid = await user.isPasswordCorrect(password);
+
+        if (!isPasswordValid) {
+            throw new AppError({ message: 'Invalid credentials', statusCode: 401 });
+        }
+
+        const jwt = this.jwtService.generateToken({ id: user.id, email: user.email });
+
+        return {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            jwt,
+        };
+    }
 }

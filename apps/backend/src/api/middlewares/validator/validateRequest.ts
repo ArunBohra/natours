@@ -18,7 +18,7 @@ export const validateRequest =
         }));
 
         throw new AppError({
-            message: 'An error occoured',
+            message: 'Please provide valid values for all the fields',
             statusCode: 400,
             errors: formatted,
         });

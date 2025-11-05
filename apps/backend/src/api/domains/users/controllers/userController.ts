@@ -38,10 +38,19 @@ export class UserController {
 
     login = catchAsync(async (req, res) => {
         const { email, password } = req.body;
+        const user = await this.userService.loginUser({ email, password });
+
+        res.cookie('jwt', user.jwt, {
+            httpOnly: true,
+            secure: getEnv('NODE_ENV') === 'production',
+            sameSite: 'strict',
+            signed: true,
+        });
 
         ResponseHandler.success(res, {
             message: 'Login successful',
             statusCode: 200,
+            data: user,
         });
     });
 

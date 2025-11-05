@@ -51,3 +51,28 @@ const userSignupSchemaDefinition: SchemaDefinition = {
 };
 
 export const userSignupSchema = createSchema(userSignupSchemaDefinition);
+
+const userLoginSchemaDefinition: SchemaDefinition = {
+    email: {
+        required: true,
+        rules: [
+            (value) => ({
+                status: validator.isEmail(value as string),
+                type: 'custom',
+                message: 'Please provide a valid email.',
+            }),
+        ],
+    },
+    password: {
+        required: true,
+        rules: [
+            (value) => ({
+                status: validator.isLength(value as string, { min: 8 }),
+                type: 'custom',
+                message: 'Password should be at least 8 characters long.',
+            }),
+        ],
+    },
+};
+
+export const userLoginSchema = createSchema(userLoginSchemaDefinition);

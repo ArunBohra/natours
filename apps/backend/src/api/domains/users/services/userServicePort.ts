@@ -11,4 +11,5 @@ interface CreateUserOutputDTO extends Omit<CreateUserDTO, 'password'> {
 
 export interface UserServicePort {
     createUser: (userData: CreateUserDTO) => Promise<CreateUserOutputDTO>;
+    loginUser: (credentials: { email: string; password: string }) => Promise<CreateUserOutputDTO>;
 }
