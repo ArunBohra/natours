@@ -4,13 +4,18 @@ import 'reflect-metadata';
 import { EmailService } from '@shared/services/email/emailService';
 import { EmailServicePort } from '@shared/services/email/emailServicePort';
 import { MailgunService } from '@shared/services/email/mailgun/mailgunService';
-import { EmailProviderPort } from '@shared/services/email/mailgun/mailgunServicePort';
+import { MailgunServicePort } from '@shared/services/email/mailgun/mailgunServicePort';
 import { TemplateRenderer } from '@shared/services/email/template/templateRenderer';
 import { TemplateRendererPort } from '@shared/services/email/template/templateRendererPort';
 import { JwtPort } from '@shared/services/jwt/jwtPort';
 import { JwtService } from '@shared/services/jwt/jwtService';
 
 import { TYPES } from '@api/di/types';
+import { TourController } from '@api/domains/tours/controllers/tourController';
+import { TourRepository } from '@api/domains/tours/database/tourRepository';
+import { TourRepositoryPort } from '@api/domains/tours/database/tourRepositoryPort';
+import { TourService } from '@api/domains/tours/services/tourService';
+import { TourServicePort } from '@api/domains/tours/services/tourServicePort';
 import { UserController } from '@api/domains/users/controllers/userController';
 import { UserRepository } from '@api/domains/users/database/userRepository';
 import { UserRepositoryPort } from '@api/domains/users/database/userRepositoryPort';
@@ -24,10 +29,15 @@ container.bind<JwtPort>(TYPES.JWTService).to(JwtService);
 
 // Email
 container.bind<EmailServicePort>(TYPES.EmailService).to(EmailService);
-container.bind<EmailProviderPort>(TYPES.EmailProvider).to(MailgunService);
+container.bind<MailgunServicePort>(TYPES.EmailProvider).to(MailgunService);
 container.bind<TemplateRendererPort>(TYPES.TemplateRenderer).to(TemplateRenderer);
 
 // User
 container.bind<UserController>(TYPES.UserController).to(UserController);
 container.bind<UserServicePort>(TYPES.UserService).to(UserService);
 container.bind<UserRepositoryPort>(TYPES.UserRepository).to(UserRepository);
+
+// Tours
+container.bind<TourController>(TYPES.TourController).to(TourController);
+container.bind<TourServicePort>(TYPES.TourService).to(TourService);
+container.bind<TourRepositoryPort>(TYPES.TourRepository).to(TourRepository);

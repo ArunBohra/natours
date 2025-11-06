@@ -8,6 +8,7 @@ import { getEnv } from '@config/env';
 import { ResponseHandler } from '@shared/utils/responseHandler/responseHandler';
 
 import { globalErrorHandler } from '@api/middlewares/errors/globalErrorHandler';
+import { tourRouter } from '@api/routes/tour/tourRoutes';
 import { userRouter } from '@api/routes/user/userRoutes';
 
 export const initApi = (): Express => {
@@ -21,6 +22,7 @@ export const initApi = (): Express => {
     api.use(helmet());
 
     api.use('/api/v1/users', userRouter);
+    api.use('/api/v1/tours', tourRouter);
 
     api.use((req, res) => {
         ResponseHandler.error(res, {

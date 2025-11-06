@@ -6,7 +6,7 @@ export const requireVerification = (req: Request, res: Response, next: NextFunct
     if (!req.user) {
         throw new AppError({
             message: 'Authentication required. Please use authenticate middleware first.',
-            statusCode: 401,
+            statusCode: 500,
         });
     }
 
@@ -19,3 +19,4 @@ export const requireVerification = (req: Request, res: Response, next: NextFunct
 
     next();
 };
+

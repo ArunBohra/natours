@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 
-import { catchAsync } from '@shared/utils/catchAsync/catchAsync';
 import { AppError } from '@shared/utils/errors/appError';
+import { catchAsync } from '@shared/utils/catchAsync/catchAsync';
 
 import { ServiceLocator } from '@api/di/serviceLocator';
 import { IUserDocument } from '@api/domains/users/database/userModel';
@@ -41,3 +41,4 @@ export const authenticate = catchAsync(async (req: Request, res: Response, next:
     req.user = currentUser;
     next();
 });
+

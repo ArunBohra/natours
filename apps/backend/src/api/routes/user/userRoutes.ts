@@ -1,9 +1,9 @@
 import { Router } from 'express';
 
 import { ServiceLocator } from '@api/di/serviceLocator';
-import { authenticate } from '@api/middlewares/auth/authenticate';
 import { validateRequest } from '@api/middlewares/validator/validateRequest';
-import { userLoginSchema, userSignupSchema } from '@api/routes/user/userSchemas';
+import { authenticate } from '@api/middlewares/auth/authenticate';
+import { userSignupSchema, userLoginSchema } from '@api/routes/user/userSchemas';
 
 const controllers = {
     userController: ServiceLocator.getUserController(),

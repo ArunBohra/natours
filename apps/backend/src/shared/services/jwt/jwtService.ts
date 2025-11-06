@@ -36,14 +36,14 @@ export class JwtService implements JwtPort {
         } catch (err) {
             if (err instanceof jsonwebtoken.TokenExpiredError) {
                 throw new AppError({
-                    message: 'Your session has expired. Please log in again.',
+                    message: 'Your token has expired. Please log in again.',
                     statusCode: 401,
                     type: 'user-error',
                 });
             }
             if (err instanceof jsonwebtoken.JsonWebTokenError) {
                 throw new AppError({
-                    message: 'Invalid session. Please log in again.',
+                    message: 'Invalid token. Please log in again.',
                     statusCode: 401,
                     type: 'user-error',
                 });

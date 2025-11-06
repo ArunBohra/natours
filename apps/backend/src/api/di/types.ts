@@ -10,4 +10,9 @@ export const TYPES = {
     UserRepository: Symbol.for('UserRepository'),
     UserService: Symbol.for('UserService'),
     AuthService: Symbol.for('AuthService'),
+
+    // Tours
+    TourController: Symbol.for('TourController'),
+    TourRepository: Symbol.for('TourRepository'),
+    TourService: Symbol.for('TourService'),
 } as const;

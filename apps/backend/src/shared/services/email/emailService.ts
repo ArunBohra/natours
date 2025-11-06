@@ -20,7 +20,7 @@ export class EmailService implements EmailServicePort {
             verificationUrl,
         });
 
-        this.emailProvider.sendEmail({
+        await this.emailProvider.sendEmail({
             to: email,
             subject: 'Email Verification',
             html,
@@ -32,10 +32,11 @@ export class EmailService implements EmailServicePort {
             userName,
         });
 
-        this.emailProvider.sendEmail({
+        await this.emailProvider.sendEmail({
             to: email,
             subject: 'Email Verification',
             html,
         });
     }
 }
+

@@ -1,5 +1,6 @@
 import { container } from '@api/di/container';
 import { TYPES } from '@api/di/types';
+import { TourController } from '@api/domains/tours/controllers/tourController';
 import { UserController } from '@api/domains/users/controllers/userController';
 import { UserRepository } from '@api/domains/users/database/userRepository';
 import { JwtPort } from '@shared/services/jwt/jwtPort';
@@ -15,5 +16,9 @@ export class ServiceLocator {
 
     static getJwtService() {
         return container.get<JwtPort>(TYPES.JWTService);
+    }
+
+    static getTourController() {
+        return container.get<TourController>(TYPES.TourController);
     }
 }

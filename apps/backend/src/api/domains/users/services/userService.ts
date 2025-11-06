@@ -1,11 +1,10 @@
 import crypto from 'crypto';
 import { inject, injectable } from 'inversify';
 
-import { getEnv } from '@config/env';
-
 import { EmailServicePort } from '@shared/services/email/emailServicePort';
 import { JwtService } from '@shared/services/jwt/jwtService';
 import { AppError } from '@shared/utils/errors/appError';
+import { getEnv } from '@config/env';
 
 import { TYPES } from '@api/di/types';
 import { UserRepository } from '@api/domains/users/database/userRepository';

@@ -3,8 +3,8 @@ import { inject, injectable } from 'inversify';
 import { getEnv } from '@config/env';
 
 import { catchAsync } from '@shared/utils/catchAsync/catchAsync';
-import { AppError } from '@shared/utils/errors/appError';
 import { ResponseHandler } from '@shared/utils/responseHandler/responseHandler';
+import { AppError } from '@shared/utils/errors/appError';
 
 import { TYPES } from '@api/di/types';
 
