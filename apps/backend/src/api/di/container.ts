@@ -9,6 +9,8 @@ import { TemplateRenderer } from '@shared/services/email/template/templateRender
 import { TemplateRendererPort } from '@shared/services/email/template/templateRendererPort';
 import { JwtPort } from '@shared/services/jwt/jwtPort';
 import { JwtService } from '@shared/services/jwt/jwtService';
+import { CloudinaryMediaService } from '@shared/services/media/cloudinary/cloudinaryService';
+import { MediaStoragePort } from '@shared/services/media/mediaStoragePort';
 
 import { TYPES } from '@api/di/types';
 import { TourController } from '@api/domains/tours/controllers/tourController';
@@ -31,6 +33,10 @@ container.bind<JwtPort>(TYPES.JWTService).to(JwtService);
 container.bind<EmailServicePort>(TYPES.EmailService).to(EmailService);
 container.bind<MailgunServicePort>(TYPES.EmailProvider).to(MailgunService);
 container.bind<TemplateRendererPort>(TYPES.TemplateRenderer).to(TemplateRenderer);
+
+// Media
+container.bind<MediaStoragePort>(TYPES.MediaStorage).to(CloudinaryMediaService);
+
 
 // User
 container.bind<UserController>(TYPES.UserController).to(UserController);

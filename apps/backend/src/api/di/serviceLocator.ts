@@ -21,4 +21,5 @@ export class ServiceLocator {
     static getTourController() {
         return container.get<TourController>(TYPES.TourController);
     }
+
 }

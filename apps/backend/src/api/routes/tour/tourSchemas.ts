@@ -14,13 +14,7 @@ const locationSchemaDefinition: SchemaDefinition = {
             (value) => {
                 const [lng, lat] = value as number[];
                 return {
-                    status:
-                        typeof lng === 'number' &&
-                        typeof lat === 'number' &&
-                        lng >= -180 &&
-                        lng <= 180 &&
-                        lat >= -90 &&
-                        lat <= 90,
+                    status: lng >= -180 && lng <= 180 && lat >= -90 && lat <= 90,
                     type: 'custom',
                     message: 'Coordinates must be valid: longitude [-180, 180], latitude [-90, 90]',
                 };
@@ -107,13 +101,7 @@ const createTourSchemaDefinition: SchemaDefinition = {
                     };
                 }
                 const [lng, lat] = coords as number[];
-                const isValid =
-                    typeof lng === 'number' &&
-                    typeof lat === 'number' &&
-                    lng >= -180 &&
-                    lng <= 180 &&
-                    lat >= -90 &&
-                    lat <= 90;
+                const isValid = lng >= -180 && lng <= 180 && lat >= -90 && lat <= 90;
                 return {
                     status: isValid,
                     type: 'custom',
@@ -163,13 +151,7 @@ const createTourSchemaDefinition: SchemaDefinition = {
                     };
                 }
                 const [lng, lat] = coords as number[];
-                const isValid =
-                    typeof lng === 'number' &&
-                    typeof lat === 'number' &&
-                    lng >= -180 &&
-                    lng <= 180 &&
-                    lat >= -90 &&
-                    lat <= 90;
+                const isValid = lng >= -180 && lng <= 180 && lat >= -90 && lat <= 90;
                 return {
                     status: isValid,
                     type: 'custom',
@@ -207,13 +189,7 @@ const createTourSchemaDefinition: SchemaDefinition = {
                     };
                 }
                 const [lng, lat] = coords as number[];
-                const isValidCoords =
-                    typeof lng === 'number' &&
-                    typeof lat === 'number' &&
-                    lng >= -180 &&
-                    lng <= 180 &&
-                    lat >= -90 &&
-                    lat <= 90;
+                const isValidCoords = lng >= -180 && lng <= 180 && lat >= -90 && lat <= 90;
                 return {
                     status: isValidCoords,
                     type: 'custom',
@@ -223,11 +199,24 @@ const createTourSchemaDefinition: SchemaDefinition = {
             },
         ],
     },
+    coverImage: {
+        required: false,
+        rules: [
+            (value) => {
+                if (!value) return { status: true, type: 'custom' };
+                return {
+                    status: validator.isURL(value as string),
+                    type: 'custom',
+                    message: 'Cover image must be a valid URL',
+                };
+            },
+        ],
+    },
     minGroupSize: {
         required: true,
         rules: [
             (value) => ({
-                status: typeof value === 'number' && value >= 1,
+                status: Number(value) >= 1,
                 type: 'custom',
                 message: 'Minimum group size must be at least 1',
             }),
@@ -237,16 +226,17 @@ const createTourSchemaDefinition: SchemaDefinition = {
         required: true,
         rules: [
             (value) => ({
-                status: typeof value === 'number' && value >= 1,
+                status: Number(value) >= 1,
                 type: 'custom',
                 message: 'Maximum group size must be at least 1',
             }),
             (value, data) => {
-                const minGroupSize = typeof data?.minGroupSize === 'number' ? data.minGroupSize : 1;
+                const minGroupSize = Number(data?.minGroupSize);
                 return {
-                    status: typeof value === 'number' && value >= minGroupSize,
+                    status: Number(value) >= minGroupSize,
                     type: 'custom',
-                    message: 'Maximum group size must be greater than or equal to minimum group size',
+                    message:
+                        'Maximum group size must be greater than or equal to minimum group size',
                 };
             },
         ],
@@ -307,7 +297,7 @@ const createTourSchemaDefinition: SchemaDefinition = {
         required: true,
         rules: [
             (value) => ({
-                status: typeof value === 'number' && value >= 0,
+                status: Number(value) >= 0,
                 type: 'custom',
                 message: 'Price must be a positive number',
             }),
@@ -317,7 +307,7 @@ const createTourSchemaDefinition: SchemaDefinition = {
         required: true,
         rules: [
             (value) => ({
-                status: typeof value === 'number' && value >= 1,
+                status: Number(value) >= 1,
                 type: 'custom',
                 message: 'Duration must be at least 1',
             }),
@@ -411,13 +401,7 @@ const updateTourSchemaDefinition: SchemaDefinition = {
                         };
                     }
                     const [lng, lat] = coords as number[];
-                    const isValidCoords =
-                        typeof lng === 'number' &&
-                        typeof lat === 'number' &&
-                        lng >= -180 &&
-                        lng <= 180 &&
-                        lat >= -90 &&
-                        lat <= 90;
+                    const isValidCoords = lng >= -180 && lng <= 180 && lat >= -90 && lat <= 90;
                     if (!isValidCoords) {
                         return {
                             status: false,
@@ -470,13 +454,7 @@ const updateTourSchemaDefinition: SchemaDefinition = {
                         };
                     }
                     const [lng, lat] = coords as number[];
-                    const isValidCoords =
-                        typeof lng === 'number' &&
-                        typeof lat === 'number' &&
-                        lng >= -180 &&
-                        lng <= 180 &&
-                        lat >= -90 &&
-                        lat <= 90;
+                    const isValidCoords = lng >= -180 && lng <= 180 && lat >= -90 && lat <= 90;
                     if (!isValidCoords) {
                         return {
                             status: false,
@@ -516,13 +494,7 @@ const updateTourSchemaDefinition: SchemaDefinition = {
                         };
                     }
                     const [lng, lat] = coords as number[];
-                    const isValidCoords =
-                        typeof lng === 'number' &&
-                        typeof lat === 'number' &&
-                        lng >= -180 &&
-                        lng <= 180 &&
-                        lat >= -90 &&
-                        lat <= 90;
+                    const isValidCoords = lng >= -180 && lng <= 180 && lat >= -90 && lat <= 90;
                     if (!isValidCoords) {
                         return {
                             status: false,
@@ -536,13 +508,26 @@ const updateTourSchemaDefinition: SchemaDefinition = {
             },
         ],
     },
+    coverImage: {
+        required: false,
+        rules: [
+            (value) => {
+                if (!value) return { status: true, type: 'custom' };
+                return {
+                    status: validator.isURL(value as string),
+                    type: 'custom',
+                    message: 'Cover image must be a valid URL',
+                };
+            },
+        ],
+    },
     minGroupSize: {
         required: false,
         rules: [
             (value) => {
                 if (!value) return { status: true, type: 'custom' };
                 return {
-                    status: typeof value === 'number' && value >= 1,
+                    status: Number(value) >= 1,
                     type: 'custom',
                     message: 'Minimum group size must be at least 1',
                 };
@@ -555,19 +540,20 @@ const updateTourSchemaDefinition: SchemaDefinition = {
             (value) => {
                 if (!value) return { status: true, type: 'custom' };
                 return {
-                    status: typeof value === 'number' && value >= 1,
+                    status: Number(value) >= 1,
                     type: 'custom',
                     message: 'Maximum group size must be at least 1',
                 };
             },
             (value, data) => {
                 if (!value) return { status: true, type: 'custom' };
-                const minGroupSize = typeof data?.minGroupSize === 'number' ? data.minGroupSize : undefined;
+                const minGroupSize = Number(data?.minGroupSize);
                 if (minGroupSize !== undefined) {
                     return {
                         status: typeof value === 'number' && value >= minGroupSize,
                         type: 'custom',
-                        message: 'Maximum group size must be greater than or equal to minimum group size',
+                        message:
+                            'Maximum group size must be greater than or equal to minimum group size',
                     };
                 }
                 return { status: true, type: 'custom' };
@@ -632,7 +618,7 @@ const updateTourSchemaDefinition: SchemaDefinition = {
             (value) => {
                 if (!value) return { status: true, type: 'custom' };
                 return {
-                    status: typeof value === 'number' && value >= 0,
+                    status: Number(value) >= 0,
                     type: 'custom',
                     message: 'Price must be a positive number',
                 };
@@ -645,7 +631,7 @@ const updateTourSchemaDefinition: SchemaDefinition = {
             (value) => {
                 if (!value) return { status: true, type: 'custom' };
                 return {
-                    status: typeof value === 'number' && value >= 1,
+                    status: Number(value) >= 1,
                     type: 'custom',
                     message: 'Duration must be at least 1',
                 };

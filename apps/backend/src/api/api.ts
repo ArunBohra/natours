@@ -16,7 +16,9 @@ export const initApi = (): Express => {
 
     const api = express();
 
+    api.use(express.urlencoded({ extended: true }));
     api.use(express.json());
+
     api.use(cookieParser(getEnv('COOKIE_SECRET')));
 
     api.use(helmet());

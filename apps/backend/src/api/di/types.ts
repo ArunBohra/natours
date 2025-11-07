@@ -15,4 +15,8 @@ export const TYPES = {
     TourController: Symbol.for('TourController'),
     TourRepository: Symbol.for('TourRepository'),
     TourService: Symbol.for('TourService'),
+    
+    // Media
+    MediaStorage: Symbol.for('MediaStorage'),
+
 } as const;

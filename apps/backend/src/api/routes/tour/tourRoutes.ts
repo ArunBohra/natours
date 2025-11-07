@@ -1,6 +1,8 @@
 import { Router } from 'express';
 
 import { ServiceLocator } from '@api/di/serviceLocator';
+import { processTourMedia } from '@api/middlewares/upload/mediaUploadMiddleware';
+import { upload } from '@api/middlewares/upload/uploadMiddleware';
 import { validateRequest } from '@api/middlewares/validator/validateRequest';
 import { createTourSchema, updateTourSchema } from '@api/routes/tour/tourSchemas';
 
@@ -12,6 +14,11 @@ export const tourRouter = Router();
 
 tourRouter.post(
     '/',
+    upload.fields([
+        { name: 'coverImage', maxCount: 1 },
+        { name: 'media', maxCount: 20 },
+    ]),
+    processTourMedia,
     validateRequest(createTourSchema, 'body'),
     controllers.tourController.createTour,
 );
