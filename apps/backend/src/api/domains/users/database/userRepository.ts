@@ -1,5 +1,5 @@
 import { injectable } from 'inversify';
-import { Document, Types } from 'mongoose';
+import { Types } from 'mongoose';
 
 import { UserRepositoryPort } from '@api/domains/users/database/userRepositoryPort';
 

@@ -1,10 +1,11 @@
 import crypto from 'crypto';
 import { inject, injectable } from 'inversify';
 
+import { getEnv } from '@config/env';
+
 import { EmailServicePort } from '@shared/services/email/emailServicePort';
 import { JwtService } from '@shared/services/jwt/jwtService';
 import { AppError } from '@shared/utils/errors/appError';
-import { getEnv } from '@config/env';
 
 import { TYPES } from '@api/di/types';
 import { UserRepository } from '@api/domains/users/database/userRepository';
@@ -17,6 +18,10 @@ export class UserService implements UserServicePort {
         @inject(TYPES.JWTService) private jwtService: JwtService,
         @inject(TYPES.EmailService) private emailService: EmailServicePort,
     ) {}
+
+    async getUserById(userId: string) {
+        return await this.userRepository.findUserById(userId);
+    }
 
     private generateVerificationToken(): string {
         return crypto.randomBytes(32).toString('hex');

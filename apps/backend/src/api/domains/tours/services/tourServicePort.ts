@@ -32,10 +32,9 @@ export interface TourOutputDTO {
 
 export interface TourServicePort {
     createTour: (tourData: CreateTourDTO) => Promise<TourOutputDTO>;
-    getTourById: (tourId: string) => Promise<TourOutputDTO | null>;
+    getTourById: (tourId: string) => Promise<TourOutputDTO>;
     getTourBySlug: (slug: string) => Promise<TourOutputDTO | null>;
     getAllTours: (filters?: { active?: boolean }) => Promise<TourOutputDTO[]>;
     updateTour: (tourId: string, tourData: UpdateTourDTO) => Promise<TourOutputDTO | null>;
     deleteTour: (tourId: string) => Promise<void>;
 }
-

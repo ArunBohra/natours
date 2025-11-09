@@ -55,10 +55,15 @@ export class TourService implements TourServicePort {
         return this.mapTourToDTO(tour);
     }
 
-    async getTourById(tourId: string): Promise<TourOutputDTO | null> {
+    async getTourById(tourId: string): Promise<TourOutputDTO> {
         const tour = await this.tourRepository.findTourById(tourId);
 
-        if (!tour) return null;
+        if (!tour) {
+            throw new AppError({
+                statusCode: 404,
+                message: "Couldn't find the tour details.",
+            });
+        }
 
         return this.mapTourToDTO(tour);
     }

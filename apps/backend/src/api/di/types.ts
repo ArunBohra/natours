@@ -4,6 +4,7 @@ export const TYPES = {
     EmailService: Symbol.for('EmailService'),
     EmailProvider: Symbol.for('EmailProvider'),
     TemplateRenderer: Symbol.for('TemplateRenderer'),
+    PaymentsProvider: Symbol.for('PaymentsProvider'),
 
     // Users
     UserController: Symbol.for('UserController'),
@@ -15,8 +16,12 @@ export const TYPES = {
     TourController: Symbol.for('TourController'),
     TourRepository: Symbol.for('TourRepository'),
     TourService: Symbol.for('TourService'),
-    
+
     // Media
     MediaStorage: Symbol.for('MediaStorage'),
 
+    // Bookings
+    BookingsController: Symbol.for('BookingsController'),
+    BookingsService: Symbol.for('BookingsService'),
+    BookingsRepository: Symbol.for('BookingsRepository'),
 } as const;

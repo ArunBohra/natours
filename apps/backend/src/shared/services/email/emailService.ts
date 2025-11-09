@@ -1,6 +1,6 @@
 import { inject } from 'inversify';
 
-import { EmailProviderPort } from '@shared/services/email/mailgun/mailgunServicePort';
+import { EmailProviderPort } from '@shared/services/email/emailProviderPort';
 import { TemplateRendererPort } from '@shared/services/email/template/templateRendererPort';
 
 import { TYPES } from '@api/di/types';
@@ -39,4 +39,3 @@ export class EmailService implements EmailServicePort {
         });
     }
 }
-
