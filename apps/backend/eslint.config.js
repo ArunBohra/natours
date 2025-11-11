@@ -43,7 +43,7 @@ export default [
             '@typescript-eslint/no-var-requires': 'off',
 
             // Style
-            'max-len': ['warn', { code: 100 }],
+            'max-len': ['warn', { code: 120 }],
             quotes: ['error', 'single', { avoidEscape: true }],
             semi: ['error', 'always'],
             'comma-dangle': ['error', 'always-multiline'],

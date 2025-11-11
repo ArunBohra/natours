@@ -1,11 +1,6 @@
 import { injectable } from 'inversify';
-import { HydratedDocument } from 'mongoose';
 
-import {
-    IBookings,
-    IBookingsDocument,
-    bookingsModel,
-} from '@api/domains/bookings/database/bookingsModel';
+import { IBookings, IBookingsDocument, bookingsModel } from '@api/domains/bookings/database/bookingsModel';
 import { BookingsRepositoryPort } from '@api/domains/bookings/database/bookingsRepositoryPort';
 
 @injectable()

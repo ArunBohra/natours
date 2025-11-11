@@ -4,12 +4,8 @@ import { AppError } from '@shared/utils/errors/appError';
 
 import { TYPES } from '@api/di/types';
 import { BookingsRepositoryPort } from '@api/domains/bookings/database/bookingsRepositoryPort';
-import { BookingsServicePort } from '@api/domains/bookings/services/bookingsServicePort';
 import { ReviewRepositoryPort } from '@api/domains/review/database/reviewRepositoryPort';
-import {
-    CreateReviewInputDTO,
-    ReviewServicePort,
-} from '@api/domains/review/services/reviewServicePort';
+import { CreateReviewInputDTO, ReviewServicePort } from '@api/domains/review/services/reviewServicePort';
 
 @injectable()
 export class ReviewService implements ReviewServicePort {
@@ -20,10 +16,7 @@ export class ReviewService implements ReviewServicePort {
 
     async createReview(reviewData: CreateReviewInputDTO) {
         const bookings =
-            (await this.bookingsRepository.findBookingsByTourAndUser(
-                reviewData.tour,
-                reviewData.user,
-            )) || [];
+            (await this.bookingsRepository.findBookingsByTourAndUser(reviewData.tour, reviewData.user)) || [];
 
         let hasBaughtTourBefore = false;
 

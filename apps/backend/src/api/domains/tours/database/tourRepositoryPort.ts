@@ -7,9 +7,6 @@ export interface TourRepositoryPort {
     findTourById: (tourId: string) => Promise<HydratedDocument<ITourDocument> | null>;
     findTourBySlug: (slug: string) => Promise<HydratedDocument<ITourDocument> | null>;
     findAllTours: (filters?: { active?: boolean }) => Promise<HydratedDocument<ITourDocument>[]>;
-    updateTour: (
-        tourId: string,
-        tourData: Partial<ITour>,
-    ) => Promise<HydratedDocument<ITourDocument> | null>;
+    updateTour: (tourId: string, tourData: Partial<ITour>) => Promise<HydratedDocument<ITourDocument> | null>;
     deleteTour: (tourId: string) => Promise<HydratedDocument<ITourDocument> | null>;
 }

@@ -11,24 +11,12 @@ const controllers = {
 
 export const userRouter = Router();
 
-userRouter.post(
-    '/signup',
-    validateRequest(userSignupSchema, 'body'),
-    controllers.userController.signup,
-);
+userRouter.post('/signup', validateRequest(userSignupSchema, 'body'), controllers.userController.signup);
 
-userRouter.post(
-    '/login',
-    validateRequest(userLoginSchema, 'body'),
-    controllers.userController.login,
-);
+userRouter.post('/login', validateRequest(userLoginSchema, 'body'), controllers.userController.login);
 
 userRouter.post('/logout', controllers.userController.logout);
 
 userRouter.get('/verify-email', controllers.userController.verifyEmail);
 
-userRouter.post(
-    '/regenerate-verification',
-    authenticate,
-    controllers.userController.regenerateVerificationToken,
-);
+userRouter.post('/regenerate-verification', authenticate, controllers.userController.regenerateVerificationToken);

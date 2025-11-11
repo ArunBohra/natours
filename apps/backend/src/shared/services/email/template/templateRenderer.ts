@@ -19,10 +19,7 @@ type TemplateProps = {
 type TemplateName = keyof typeof templates;
 
 export class TemplateRenderer implements TemplateRendererPort {
-    async renderTemplate<T extends TemplateName>(
-        templateName: T,
-        props?: TemplateProps[T],
-    ): Promise<string> {
+    async renderTemplate<T extends TemplateName>(templateName: T, props?: TemplateProps[T]): Promise<string> {
         const Template = templates[templateName] as React.FC<TemplateProps[T]>;
         if (!Template) {
             throw new InternalServerError({

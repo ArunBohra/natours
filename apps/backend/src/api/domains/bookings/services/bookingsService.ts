@@ -66,11 +66,7 @@ export class BookingsService implements BookingsServicePort {
     }
 
     verifyWebhookSignature(rawBody: string, razorpaySignature: string, webhookSecret: string) {
-        return this.paymentsProvider.verifyWebhookSignature(
-            rawBody,
-            razorpaySignature,
-            webhookSecret,
-        );
+        return this.paymentsProvider.verifyWebhookSignature(rawBody, razorpaySignature, webhookSecret);
     }
 
     async handleSuccessfulBooking(orderId: string) {

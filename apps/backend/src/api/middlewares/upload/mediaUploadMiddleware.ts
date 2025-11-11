@@ -1,5 +1,3 @@
-import { RequestHandler } from 'express';
-
 import { MediaStoragePort } from '@shared/services/media/mediaStoragePort';
 import { catchAsync } from '@shared/utils/catchAsync/catchAsync';
 import { AppError } from '@shared/utils/errors/appError';
@@ -10,7 +8,7 @@ import { TYPES } from '@api/di/types';
 export const processTourMedia = catchAsync(async (req, res, next) => {
     try {
         const mediaService = container.get<MediaStoragePort>(TYPES.MediaStorage);
-        const files = (req as any).files as
+        const files = req.files as
             | Record<string, { buffer: Buffer; originalname: string; mimetype: string }[]>
             | undefined;
 
@@ -24,7 +22,7 @@ export const processTourMedia = catchAsync(async (req, res, next) => {
                 filename: file.originalname,
                 type,
             });
-            (req.body as any).coverImage = uploaded.url;
+            (req.body as Record<string, unknown>).coverImage = uploaded.url;
         }
 
         if (files?.media?.length) {
@@ -39,15 +37,11 @@ export const processTourMedia = catchAsync(async (req, res, next) => {
                     return { url: uploaded.url, type: uploaded.type };
                 }),
             );
-            (req.body as any).media = uploadedMedia;
+            (req.body as Record<string, unknown>).media = uploadedMedia;
         }
 
         next();
     } catch (error) {
-        next(
-            error instanceof AppError
-                ? error
-                : new AppError({ message: 'Failed to upload media', statusCode: 500 }),
-        );
+        next(error instanceof AppError ? error : new AppError({ message: 'Failed to upload media', statusCode: 500 }));
     }
 });

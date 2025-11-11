@@ -5,10 +5,7 @@ import Razorpay from 'razorpay';
 
 import { getEnv } from '@config/env';
 
-import {
-    CreateOderInputDto,
-    PaymentsProviderPort,
-} from '@shared/services/payments/paymentsProviderPort';
+import { CreateOderInputDto, PaymentsProviderPort } from '@shared/services/payments/paymentsProviderPort';
 
 @injectable()
 export class RazorpayService implements PaymentsProviderPort {
@@ -32,15 +29,8 @@ export class RazorpayService implements PaymentsProviderPort {
      * @param webhookSecret - Your Razorpay webhook secret.
      * @returns `true` if the signature is valid, otherwise `false`.
      */
-    verifyWebhookSignature = (
-        rawBody: string,
-        razorpaySignature: string,
-        webhookSecret: string,
-    ): boolean => {
-        const expectedSignature = crypto
-            .createHmac('sha256', webhookSecret)
-            .update(rawBody)
-            .digest('hex');
+    verifyWebhookSignature = (rawBody: string, razorpaySignature: string, webhookSecret: string): boolean => {
+        const expectedSignature = crypto.createHmac('sha256', webhookSecret).update(rawBody).digest('hex');
 
         return expectedSignature === razorpaySignature;
     };

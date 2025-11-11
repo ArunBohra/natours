@@ -28,11 +28,7 @@ const locationSchema = new Schema(
             required: true,
             validate: {
                 validator: (value: number[]) =>
-                    value.length === 2 &&
-                    value[0] >= -180 &&
-                    value[0] <= 180 &&
-                    value[1] >= -90 &&
-                    value[1] <= 90,
+                    value.length === 2 && value[0] >= -180 && value[0] <= 180 && value[1] >= -90 && value[1] <= 90,
                 message: 'Coordinates must be [longitude, latitude] with valid ranges',
             },
         },
@@ -180,7 +176,10 @@ export interface ITour {
     active?: boolean;
 }
 
-export interface ITourDocument extends ITour, IBaseDocument {}
+export interface ITourDocument extends ITour, IBaseDocument {
+    createdAt: Date;
+    updatedAt: Date;
+}
 
 interface ITourModel extends Model<ITourDocument> {}
 

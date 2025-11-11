@@ -56,8 +56,7 @@ export class TourController {
 
     getAllTours = catchAsync(async (req, res) => {
         const { active } = req.query;
-        const filters =
-            active !== undefined ? { active: active === 'true' || active === '1' } : undefined;
+        const filters = active !== undefined ? { active: active === 'true' || active === '1' } : undefined;
 
         const tours = await this.tourService.getAllTours(filters);
 

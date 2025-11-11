@@ -33,9 +33,7 @@ export class UserService implements UserServicePort {
     }
 
     async createUser(userData: CreateUserDTO) {
-        const existingUser = await this.userRepository.findUserByEmail(
-            userData.email.toLowerCase(),
-        );
+        const existingUser = await this.userRepository.findUserByEmail(userData.email.toLowerCase());
 
         if (existingUser) {
             throw new AppError({ message: 'User with that email exists', statusCode: 401 });

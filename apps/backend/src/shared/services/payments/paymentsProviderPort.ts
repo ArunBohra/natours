@@ -25,9 +25,5 @@ export interface PaymentWebhookPayload extends RazorpayPaymentWebhookPayload {}
 
 export interface PaymentsProviderPort {
     createOrder: (orderDetails: CreateOderInputDto) => Promise<CreateOrderOutputDTO>;
-    verifyWebhookSignature: (
-        rawBody: string,
-        razorpaySignature: string,
-        webhookSecret: string,
-    ) => boolean;
+    verifyWebhookSignature: (rawBody: string, razorpaySignature: string, webhookSecret: string) => boolean;
 }

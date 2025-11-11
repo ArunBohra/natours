@@ -30,11 +30,7 @@ tourRouter.get('/:id', controllers.tourController.getTourById);
 tourRouter.get('/slug/:slug', controllers.tourController.getTourBySlug);
 
 // not tested
-tourRouter.patch(
-    '/:id',
-    validateRequest(updateTourSchema, 'body'),
-    controllers.tourController.updateTour,
-);
+tourRouter.patch('/:id', validateRequest(updateTourSchema, 'body'), controllers.tourController.updateTour);
 
 // not tested
 tourRouter.delete('/:id', controllers.tourController.deleteTour);

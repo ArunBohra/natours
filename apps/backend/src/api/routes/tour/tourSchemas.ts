@@ -2,6 +2,7 @@ import validator from 'validator';
 
 import { SchemaDefinition, createSchema } from '@api/middlewares/validator/createValidatorSchema';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const locationSchemaDefinition: SchemaDefinition = {
     coordinates: {
         required: true,
@@ -31,6 +32,7 @@ const locationSchemaDefinition: SchemaDefinition = {
     },
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const mediaAssetSchemaDefinition: SchemaDefinition = {
     url: {
         required: true,
@@ -105,8 +107,7 @@ const createTourSchemaDefinition: SchemaDefinition = {
                 return {
                     status: isValid,
                     type: 'custom',
-                    message:
-                        'Location coordinates must be valid: longitude [-180, 180], latitude [-90, 90]',
+                    message: 'Location coordinates must be valid: longitude [-180, 180], latitude [-90, 90]',
                 };
             },
         ],
@@ -146,8 +147,7 @@ const createTourSchemaDefinition: SchemaDefinition = {
                     return {
                         status: false,
                         type: 'custom',
-                        message:
-                            'Start location coordinates must be an array with [longitude, latitude]',
+                        message: 'Start location coordinates must be an array with [longitude, latitude]',
                     };
                 }
                 const [lng, lat] = coords as number[];
@@ -155,8 +155,7 @@ const createTourSchemaDefinition: SchemaDefinition = {
                 return {
                     status: isValid,
                     type: 'custom',
-                    message:
-                        'Start location coordinates must be valid: longitude [-180, 180], latitude [-90, 90]',
+                    message: 'Start location coordinates must be valid: longitude [-180, 180], latitude [-90, 90]',
                 };
             },
         ],
@@ -166,8 +165,7 @@ const createTourSchemaDefinition: SchemaDefinition = {
         rules: [
             (value) => {
                 if (!value) return { status: true, type: 'custom' };
-                const isValid =
-                    typeof value === 'object' && value !== null && !Array.isArray(value);
+                const isValid = typeof value === 'object' && value !== null && !Array.isArray(value);
                 if (!isValid) {
                     return {
                         status: false,
@@ -184,8 +182,7 @@ const createTourSchemaDefinition: SchemaDefinition = {
                     return {
                         status: false,
                         type: 'custom',
-                        message:
-                            'End location coordinates must be an array with [longitude, latitude]',
+                        message: 'End location coordinates must be an array with [longitude, latitude]',
                     };
                 }
                 const [lng, lat] = coords as number[];
@@ -193,8 +190,7 @@ const createTourSchemaDefinition: SchemaDefinition = {
                 return {
                     status: isValidCoords,
                     type: 'custom',
-                    message:
-                        'End location coordinates must be valid: longitude [-180, 180], latitude [-90, 90]',
+                    message: 'End location coordinates must be valid: longitude [-180, 180], latitude [-90, 90]',
                 };
             },
         ],
@@ -235,8 +231,7 @@ const createTourSchemaDefinition: SchemaDefinition = {
                 return {
                     status: Number(value) >= minGroupSize,
                     type: 'custom',
-                    message:
-                        'Maximum group size must be greater than or equal to minimum group size',
+                    message: 'Maximum group size must be greater than or equal to minimum group size',
                 };
             },
         ],
@@ -278,10 +273,7 @@ const createTourSchemaDefinition: SchemaDefinition = {
                             message: `Media item at index ${i} must have a valid URL`,
                         };
                     }
-                    if (
-                        !mediaItem.type ||
-                        (mediaItem.type !== 'image' && mediaItem.type !== 'video')
-                    ) {
+                    if (!mediaItem.type || (mediaItem.type !== 'image' && mediaItem.type !== 'video')) {
                         return {
                             status: false,
                             type: 'custom',
@@ -380,8 +372,7 @@ const updateTourSchemaDefinition: SchemaDefinition = {
         rules: [
             (value) => {
                 if (!value) return { status: true, type: 'custom' };
-                const isValid =
-                    typeof value === 'object' && value !== null && !Array.isArray(value);
+                const isValid = typeof value === 'object' && value !== null && !Array.isArray(value);
                 if (!isValid) {
                     return {
                         status: false,
@@ -396,8 +387,7 @@ const updateTourSchemaDefinition: SchemaDefinition = {
                         return {
                             status: false,
                             type: 'custom',
-                            message:
-                                'Location coordinates must be an array with [longitude, latitude]',
+                            message: 'Location coordinates must be an array with [longitude, latitude]',
                         };
                     }
                     const [lng, lat] = coords as number[];
@@ -406,8 +396,7 @@ const updateTourSchemaDefinition: SchemaDefinition = {
                         return {
                             status: false,
                             type: 'custom',
-                            message:
-                                'Location coordinates must be valid: longitude [-180, 180], latitude [-90, 90]',
+                            message: 'Location coordinates must be valid: longitude [-180, 180], latitude [-90, 90]',
                         };
                     }
                 }
@@ -433,8 +422,7 @@ const updateTourSchemaDefinition: SchemaDefinition = {
         rules: [
             (value) => {
                 if (!value) return { status: true, type: 'custom' };
-                const isValid =
-                    typeof value === 'object' && value !== null && !Array.isArray(value);
+                const isValid = typeof value === 'object' && value !== null && !Array.isArray(value);
                 if (!isValid) {
                     return {
                         status: false,
@@ -449,8 +437,7 @@ const updateTourSchemaDefinition: SchemaDefinition = {
                         return {
                             status: false,
                             type: 'custom',
-                            message:
-                                'Start location coordinates must be an array with [longitude, latitude]',
+                            message: 'Start location coordinates must be an array with [longitude, latitude]',
                         };
                     }
                     const [lng, lat] = coords as number[];
@@ -473,8 +460,7 @@ const updateTourSchemaDefinition: SchemaDefinition = {
         rules: [
             (value) => {
                 if (!value) return { status: true, type: 'custom' };
-                const isValid =
-                    typeof value === 'object' && value !== null && !Array.isArray(value);
+                const isValid = typeof value === 'object' && value !== null && !Array.isArray(value);
                 if (!isValid) {
                     return {
                         status: false,
@@ -489,8 +475,7 @@ const updateTourSchemaDefinition: SchemaDefinition = {
                         return {
                             status: false,
                             type: 'custom',
-                            message:
-                                'End location coordinates must be an array with [longitude, latitude]',
+                            message: 'End location coordinates must be an array with [longitude, latitude]',
                         };
                     }
                     const [lng, lat] = coords as number[];
@@ -552,8 +537,7 @@ const updateTourSchemaDefinition: SchemaDefinition = {
                     return {
                         status: typeof value === 'number' && value >= minGroupSize,
                         type: 'custom',
-                        message:
-                            'Maximum group size must be greater than or equal to minimum group size',
+                        message: 'Maximum group size must be greater than or equal to minimum group size',
                     };
                 }
                 return { status: true, type: 'custom' };
@@ -597,10 +581,7 @@ const updateTourSchemaDefinition: SchemaDefinition = {
                             message: `Media item at index ${i} must have a valid URL`,
                         };
                     }
-                    if (
-                        !mediaItem.type ||
-                        (mediaItem.type !== 'image' && mediaItem.type !== 'video')
-                    ) {
+                    if (!mediaItem.type || (mediaItem.type !== 'image' && mediaItem.type !== 'video')) {
                         return {
                             status: false,
                             type: 'custom',

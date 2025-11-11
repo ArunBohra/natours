@@ -1,8 +1,10 @@
 import { inject, injectable } from 'inversify';
+import { HydratedDocument } from 'mongoose';
 
 import { AppError } from '@shared/utils/errors/appError';
 
 import { TYPES } from '@api/di/types';
+import { ITourDocument } from '@api/domains/tours/database/tourModel';
 import { TourRepositoryPort } from '@api/domains/tours/database/tourRepositoryPort';
 import {
     CreateTourDTO,
@@ -15,11 +17,11 @@ import {
 export class TourService implements TourServicePort {
     constructor(@inject(TYPES.TourRepository) private tourRepository: TourRepositoryPort) {}
 
-    private mapTourToDTO(tour: any): TourOutputDTO {
+    private mapTourToDTO(tour: HydratedDocument<ITourDocument>): TourOutputDTO {
         return {
             id: tour._id.toString(),
             name: tour.name,
-            slug: tour.slug,
+            slug: tour.slug!,
             description: tour.description,
             location: tour.location,
             mapLink: tour.mapLink,
@@ -32,14 +34,10 @@ export class TourService implements TourServicePort {
             duration: tour.duration,
             durationUnit: tour.durationUnit || 'days',
             notes: tour.notes,
-            guide: tour.guide
-                ? {
-                      id: tour.guide._id?.toString() || tour.guide.toString(),
-                      ...(typeof tour.guide === 'object' && tour.guide !== null
-                          ? { ...tour.guide.toObject?.() }
-                          : {}),
-                  }
-                : undefined,
+            // Implement guides later
+            guide: {
+                id: String(tour.guide),
+            },
             active: tour.active ?? true,
             createdAt: tour.createdAt,
             updatedAt: tour.updatedAt,
