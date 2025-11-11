@@ -237,23 +237,13 @@ Combine both approaches:
 ```typescript
 interface DiscountServicePort {
     // Validate discount code
-    validateDiscount(
-        code: string,
-        tourId: string,
-        userId: string,
-        amount: number,
-    ): Promise<DiscountValidationResult>;
+    validateDiscount(code: string, tourId: string, userId: string, amount: number): Promise<DiscountValidationResult>;
 
     // Apply discount calculation
     calculateDiscount(originalPrice: number, discount: Discount): number;
 
     // Track discount usage
-    recordDiscountUsage(
-        discountId: string,
-        userId: string,
-        tourId: string,
-        bookingId: string,
-    ): Promise<void>;
+    recordDiscountUsage(discountId: string, userId: string, tourId: string, bookingId: string): Promise<void>;
 
     // Create discount
     createDiscount(discountData: CreateDiscountDTO): Promise<Discount>;
@@ -286,12 +276,7 @@ When creating a booking:
 ```typescript
 // In booking service
 if (discountCode) {
-    const discount = await discountService.validateDiscount(
-        discountCode,
-        tourId,
-        userId,
-        tour.price,
-    );
+    const discount = await discountService.validateDiscount(discountCode, tourId, userId, tour.price);
 
     if (!discount.valid) {
         throw new AppError({ message: discount.message, statusCode: 400 });
