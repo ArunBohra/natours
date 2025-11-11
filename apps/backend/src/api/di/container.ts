@@ -20,6 +20,11 @@ import { BookingsRepository } from '@api/domains/bookings/database/bookingsRepos
 import { BookingsRepositoryPort } from '@api/domains/bookings/database/bookingsRepositoryPort';
 import { BookingsService } from '@api/domains/bookings/services/bookingsService';
 import { BookingsServicePort } from '@api/domains/bookings/services/bookingsServicePort';
+import { ReviewController } from '@api/domains/review/controllers/reviewController';
+import { ReviewRepository } from '@api/domains/review/database/reviewRepository';
+import { ReviewRepositoryPort } from '@api/domains/review/database/reviewRepositoryPort';
+import { ReviewServicePort } from '@api/domains/review/services/reviewServicePort';
+import { ReviewService } from '@api/domains/review/services/reviewServices';
 import { TourController } from '@api/domains/tours/controllers/tourController';
 import { TourRepository } from '@api/domains/tours/database/tourRepository';
 import { TourRepositoryPort } from '@api/domains/tours/database/tourRepositoryPort';
@@ -61,3 +66,8 @@ container.bind<BookingsRepositoryPort>(TYPES.BookingsRepository).to(BookingsRepo
 
 // Payments
 container.bind<PaymentsProviderPort>(TYPES.PaymentsProvider).to(RazorpayService);
+
+// Reviews
+container.bind<ReviewController>(TYPES.ReviewController).to(ReviewController);
+container.bind<ReviewServicePort>(TYPES.ReviewService).to(ReviewService);
+container.bind<ReviewRepositoryPort>(TYPES.ReviewRepository).to(ReviewRepository);

@@ -3,7 +3,7 @@ import { inject, injectable } from 'inversify';
 import { AppError } from '@shared/utils/errors/appError';
 
 import { TYPES } from '@api/di/types';
-import { TourRepository } from '@api/domains/tours/database/tourRepository';
+import { TourRepositoryPort } from '@api/domains/tours/database/tourRepositoryPort';
 import {
     CreateTourDTO,
     TourOutputDTO,
@@ -13,7 +13,7 @@ import {
 
 @injectable()
 export class TourService implements TourServicePort {
-    constructor(@inject(TYPES.TourRepository) private tourRepository: TourRepository) {}
+    constructor(@inject(TYPES.TourRepository) private tourRepository: TourRepositoryPort) {}
 
     private mapTourToDTO(tour: any): TourOutputDTO {
         return {

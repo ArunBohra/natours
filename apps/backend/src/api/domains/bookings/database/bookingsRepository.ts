@@ -1,10 +1,30 @@
 import { injectable } from 'inversify';
+import { HydratedDocument } from 'mongoose';
 
-import { IBookings, bookingsModel } from '@api/domains/bookings/database/bookingsModel';
+import {
+    IBookings,
+    IBookingsDocument,
+    bookingsModel,
+} from '@api/domains/bookings/database/bookingsModel';
 import { BookingsRepositoryPort } from '@api/domains/bookings/database/bookingsRepositoryPort';
 
 @injectable()
 export class BookingsRepository implements BookingsRepositoryPort {
+    async getBookingById(bookingId: string, populate?: (keyof IBookingsDocument)[]) {
+        const booking = await bookingsModel.findById(bookingId);
+
+        if (booking && populate?.length) {
+            booking.populate(populate);
+        }
+
+        return booking;
+    }
+
+    async findBookingsByTourAndUser(tourId: string, userId: string) {
+        const booking = await bookingsModel.find({ tour: tourId, user: userId });
+        return booking;
+    }
+
     async createBooking(bookingData: IBookings) {
         return await bookingsModel.create(bookingData);
     }

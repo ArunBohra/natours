@@ -3,9 +3,10 @@ import { inject, injectable } from 'inversify';
 import { getEnv } from '@config/env';
 
 import { PaymentsProviderPort } from '@shared/services/payments/paymentsProviderPort';
+import { AppError } from '@shared/utils/errors/appError';
 
 import { TYPES } from '@api/di/types';
-import { BookingsRepository } from '@api/domains/bookings/database/bookingsRepository';
+import { BookingsRepositoryPort } from '@api/domains/bookings/database/bookingsRepositoryPort';
 import {
     BookTourInputDTO,
     BookTourOutputDTO,
@@ -16,9 +17,26 @@ import {
 @injectable()
 export class BookingsService implements BookingsServicePort {
     constructor(
-        @inject(TYPES.BookingsRepository) private bookingsRepository: BookingsRepository,
+        @inject(TYPES.BookingsRepository) private bookingsRepository: BookingsRepositoryPort,
         @inject(TYPES.PaymentsProvider) private paymentsProvider: PaymentsProviderPort,
     ) {}
+
+    async getOneBooking(bookingId: string) {
+        const booking = await this.bookingsRepository.getBookingById(bookingId);
+
+        if (!booking) {
+            throw new AppError({
+                message: 'We could not find your booking',
+                statusCode: 404,
+            });
+        }
+
+        return {
+            id: booking.id,
+            tour: booking.tour,
+            user: booking.user,
+        };
+    }
 
     async bookTour(bookTourInput: BookTourInputDTO, bookingRefs: BookingRefsDto) {
         const booking = await this.paymentsProvider.createOrder(bookTourInput.bookingData);

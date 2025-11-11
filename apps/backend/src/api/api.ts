@@ -9,6 +9,7 @@ import { ResponseHandler } from '@shared/utils/responseHandler/responseHandler';
 
 import { globalErrorHandler } from '@api/middlewares/errors/globalErrorHandler';
 import { bookingsRouter } from '@api/routes/bookings/bookingsRoutes';
+import { reviewRouter } from '@api/routes/review/reviewRoutes';
 import { tourRouter } from '@api/routes/tour/tourRoutes';
 import { userRouter } from '@api/routes/user/userRoutes';
 
@@ -27,6 +28,7 @@ export const initApi = (): Express => {
     api.use('/api/v1/users', userRouter);
     api.use('/api/v1/tours', tourRouter);
     api.use('/api/v1/bookings', bookingsRouter);
+    api.use('/api/v1/reviews', reviewRouter);
 
     api.use((req, res) => {
         ResponseHandler.error(res, {

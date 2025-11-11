@@ -1,6 +1,8 @@
 import { Model, Schema, Types, model } from 'mongoose';
 import { Orders } from 'razorpay/dist/types/orders';
 
+import { ITourDocument } from '@api/domains/tours/database/tourModel';
+import { IUserDocument } from '@api/domains/users/database/userModel';
 import { IBaseDocument } from '@api/interfaces/baseDocument';
 
 const bookingsSchema = new Schema(
@@ -12,7 +14,7 @@ const bookingsSchema = new Schema(
         },
         user: {
             type: Types.ObjectId,
-            ref: 'Tour',
+            ref: 'User',
             required: true,
         },
         orderId: {
@@ -35,8 +37,8 @@ const bookingsSchema = new Schema(
 );
 
 export interface IBookings {
-    tour: string;
-    user: string;
+    tour: string | ITourDocument;
+    user: string | IUserDocument;
     status: Orders.RazorpayOrder['status'];
     receipt: string;
     orderId: string;

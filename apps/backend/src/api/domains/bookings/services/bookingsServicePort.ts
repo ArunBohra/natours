@@ -1,5 +1,7 @@
 import { Currency } from '@shared/types/types';
 
+import { IBookings } from '@api/domains/bookings/database/bookingsModel';
+
 export interface TourBookingData {
     amount: number;
     currency: Currency;
@@ -35,6 +37,7 @@ export interface BookingRefsDto {
 }
 
 export interface BookingsServicePort {
+    getOneBooking: (bookingId: string) => Promise<{}>;
     bookTour: (
         bookingData: BookTourInputDTO,
         bookingRefs: BookingRefsDto,

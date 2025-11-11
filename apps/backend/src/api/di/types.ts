@@ -24,4 +24,9 @@ export const TYPES = {
     BookingsController: Symbol.for('BookingsController'),
     BookingsService: Symbol.for('BookingsService'),
     BookingsRepository: Symbol.for('BookingsRepository'),
+
+    // Reviews
+    ReviewController: Symbol.for('ReviewController'),
+    ReviewService: Symbol.for('ReviewService'),
+    ReviewRepository: Symbol.for('ReviewRepository'),
 } as const;

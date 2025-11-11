@@ -1,5 +1,4 @@
 import { injectable } from 'inversify';
-import { Types } from 'mongoose';
 
 import { UserRepositoryPort } from '@api/domains/users/database/userRepositoryPort';
 
@@ -13,7 +12,7 @@ export class UserRepository implements UserRepositoryPort {
     }
 
     async findUserById(userId: string) {
-        return await userModel.findById(new Types.ObjectId(userId));
+        return await userModel.findById(userId);
     }
 
     async findUserByEmail(email: string) {
@@ -25,12 +24,12 @@ export class UserRepository implements UserRepositoryPort {
     }
 
     async updateUser(userId: string, updateData: Partial<IUser>) {
-        return await userModel.findByIdAndUpdate(new Types.ObjectId(userId), updateData, {
+        return await userModel.findByIdAndUpdate(userId, updateData, {
             new: true,
         });
     }
 
     async deleteUser(userId: string) {
-        return await userModel.findByIdAndDelete(new Types.ObjectId(userId));
+        return await userModel.findByIdAndDelete(userId);
     }
 }

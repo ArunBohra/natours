@@ -9,7 +9,7 @@ import { bookTourSchema } from '@api/routes/bookings/bookingsSchema';
 export const bookingsRouter = Router();
 
 const controllers = {
-    bookingsController: ServiceLocator.getBookinsController(),
+    bookingsController: ServiceLocator.getBookingsController(),
 };
 
 bookingsRouter.post(

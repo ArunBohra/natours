@@ -4,18 +4,18 @@ import { inject, injectable } from 'inversify';
 import { getEnv } from '@config/env';
 
 import { EmailServicePort } from '@shared/services/email/emailServicePort';
-import { JwtService } from '@shared/services/jwt/jwtService';
+import { JwtPort } from '@shared/services/jwt/jwtPort';
 import { AppError } from '@shared/utils/errors/appError';
 
 import { TYPES } from '@api/di/types';
-import { UserRepository } from '@api/domains/users/database/userRepository';
+import { UserRepositoryPort } from '@api/domains/users/database/userRepositoryPort';
 import { CreateUserDTO, UserServicePort } from '@api/domains/users/services/userServicePort';
 
 @injectable()
 export class UserService implements UserServicePort {
     constructor(
-        @inject(TYPES.UserRepository) private userRepository: UserRepository,
-        @inject(TYPES.JWTService) private jwtService: JwtService,
+        @inject(TYPES.UserRepository) private userRepository: UserRepositoryPort,
+        @inject(TYPES.JWTService) private jwtService: JwtPort,
         @inject(TYPES.EmailService) private emailService: EmailServicePort,
     ) {}
 

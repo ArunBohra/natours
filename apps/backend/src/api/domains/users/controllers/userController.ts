@@ -3,8 +3,8 @@ import { inject, injectable } from 'inversify';
 import { getEnv } from '@config/env';
 
 import { catchAsync } from '@shared/utils/catchAsync/catchAsync';
-import { ResponseHandler } from '@shared/utils/responseHandler/responseHandler';
 import { AppError } from '@shared/utils/errors/appError';
+import { ResponseHandler } from '@shared/utils/responseHandler/responseHandler';
 
 import { TYPES } from '@api/di/types';
 
@@ -94,7 +94,7 @@ export class UserController {
             });
         }
 
-        await this.userService.regenerateVerificationToken(req.user._id.toString());
+        await this.userService.regenerateVerificationToken(req.user.id.toString());
 
         ResponseHandler.success(res, {
             message: 'Verification email sent successfully',
