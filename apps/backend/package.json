@@ -2,6 +2,9 @@
     "name": "backend",
     "version": "1.0.0",
     "description": "Backend for SnippetVault - an app for managing code snippets",
+    "license": "ISC",
+    "author": "Arun Bohra",
+    "type": "module",
     "main": "index.js",
     "scripts": {
         "dev": "tsx watch src/server.ts",
@@ -10,13 +13,6 @@
         "lint:check": "eslint 'src/**/*'",
         "lint:fix": "eslint 'src/**/*' --fix",
         "format": "prettier --write ."
-    },
-    "author": "Arun Bohra",
-    "license": "ISC",
-    "type": "module",
-    "engines": {
-        "node": ">=22.15.0",
-        "npm": ">=11.4.1"
     },
     "dependencies": {
         "@react-email/render": "^1.1.3",
@@ -57,5 +53,9 @@
         "prettier": "^3.5.3",
         "tsx": "^4.20.3",
         "typescript": "^5.8.3"
+    },
+    "engines": {
+        "node": ">=22.15.0",
+        "npm": ">=11.4.1"
     }
 }
