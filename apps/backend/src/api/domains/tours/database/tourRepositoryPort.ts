@@ -13,4 +13,3 @@ export interface TourRepositoryPort {
     ) => Promise<HydratedDocument<ITourDocument> | null>;
     deleteTour: (tourId: string) => Promise<HydratedDocument<ITourDocument> | null>;
 }
-

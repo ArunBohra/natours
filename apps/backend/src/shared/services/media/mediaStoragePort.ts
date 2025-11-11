@@ -22,5 +22,3 @@ export interface MediaStoragePort {
         type: MediaKind;
     }) => Promise<UploadedMedia>;
 }
-
-

@@ -19,4 +19,3 @@ export const requireVerification = (req: Request, res: Response, next: NextFunct
 
     next();
 };
-

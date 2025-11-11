@@ -1,14 +1,17 @@
 # Discount Implementation Suggestion
 
 ## Overview
+
 This document outlines suggested approaches for implementing discounts/promotions for tours in the Natours application.
 
 ## Recommended Approach: Flexible Discount System
 
 ### Option 1: Embedded Discount Model (Recommended for Simplicity)
+
 **Best for:** Simple discount scenarios, fixed discounts per tour
 
 #### Database Schema Addition to Tour Model:
+
 ```typescript
 discounts: {
     type: [{
@@ -56,143 +59,155 @@ discounts: {
 ```
 
 **Pros:**
+
 - Simple to implement
 - Easy to query discounts per tour
 - Good for tour-specific promotions
 
 **Cons:**
+
 - Harder to manage global discounts
 - Code duplication if discount logic is complex
 
 ---
 
 ### Option 2: Separate Discount Collection (Recommended for Flexibility)
+
 **Best for:** Complex discount scenarios, global discounts, cross-tour promotions
 
 #### New Discount Model:
+
 ```typescript
 // domains/discounts/database/discountModel.ts
-const discountSchema = new Schema({
-    code: {
-        type: String,
-        unique: true,
-        required: true,
-        uppercase: true,
+const discountSchema = new Schema(
+    {
+        code: {
+            type: String,
+            unique: true,
+            required: true,
+            uppercase: true,
+        },
+        name: {
+            type: String,
+            required: true,
+        },
+        description: {
+            type: String,
+        },
+        type: {
+            type: String,
+            enum: ['percentage', 'fixed', 'buy-x-get-y'],
+            required: true,
+        },
+        value: {
+            type: Number,
+            required: true,
+        },
+        // Tour-specific or global
+        tourIds: {
+            type: [Types.ObjectId],
+            ref: 'Tour',
+            default: [], // Empty = applies to all tours
+        },
+        // Date range
+        startDate: {
+            type: Date,
+            required: true,
+        },
+        endDate: {
+            type: Date,
+            required: true,
+        },
+        // Usage limits
+        maxUses: {
+            type: Number,
+            default: null, // null = unlimited
+        },
+        maxUsesPerUser: {
+            type: Number,
+            default: 1,
+        },
+        usedCount: {
+            type: Number,
+            default: 0,
+        },
+        // Conditions
+        minPurchaseAmount: {
+            type: Number,
+            default: 0,
+        },
+        minGroupSize: {
+            type: Number,
+            default: 0,
+        },
+        // User eligibility
+        userEligibility: {
+            type: String,
+            enum: ['all', 'new-users', 'returning-users', 'verified-only'],
+            default: 'all',
+        },
+        active: {
+            type: Boolean,
+            default: true,
+        },
     },
-    name: {
-        type: String,
-        required: true,
+    {
+        timestamps: true,
     },
-    description: {
-        type: String,
-    },
-    type: {
-        type: String,
-        enum: ['percentage', 'fixed', 'buy-x-get-y'],
-        required: true,
-    },
-    value: {
-        type: Number,
-        required: true,
-    },
-    // Tour-specific or global
-    tourIds: {
-        type: [Types.ObjectId],
-        ref: 'Tour',
-        default: [], // Empty = applies to all tours
-    },
-    // Date range
-    startDate: {
-        type: Date,
-        required: true,
-    },
-    endDate: {
-        type: Date,
-        required: true,
-    },
-    // Usage limits
-    maxUses: {
-        type: Number,
-        default: null, // null = unlimited
-    },
-    maxUsesPerUser: {
-        type: Number,
-        default: 1,
-    },
-    usedCount: {
-        type: Number,
-        default: 0,
-    },
-    // Conditions
-    minPurchaseAmount: {
-        type: Number,
-        default: 0,
-    },
-    minGroupSize: {
-        type: Number,
-        default: 0,
-    },
-    // User eligibility
-    userEligibility: {
-        type: String,
-        enum: ['all', 'new-users', 'returning-users', 'verified-only'],
-        default: 'all',
-    },
-    active: {
-        type: Boolean,
-        default: true,
-    },
-}, {
-    timestamps: true,
-});
+);
 ```
 
 #### Discount Usage Tracking:
+
 ```typescript
 // domains/discounts/database/discountUsageModel.ts
-const discountUsageSchema = new Schema({
-    discountId: {
-        type: Types.ObjectId,
-        ref: 'Discount',
-        required: true,
+const discountUsageSchema = new Schema(
+    {
+        discountId: {
+            type: Types.ObjectId,
+            ref: 'Discount',
+            required: true,
+        },
+        userId: {
+            type: Types.ObjectId,
+            ref: 'User',
+            required: true,
+        },
+        tourId: {
+            type: Types.ObjectId,
+            ref: 'Tour',
+            required: true,
+        },
+        bookingId: {
+            type: Types.ObjectId,
+            ref: 'Booking',
+            required: true,
+        },
+        discountAmount: {
+            type: Number,
+            required: true,
+        },
+        originalPrice: {
+            type: Number,
+            required: true,
+        },
+        finalPrice: {
+            type: Number,
+            required: true,
+        },
+        usedAt: {
+            type: Date,
+            default: Date.now,
+        },
     },
-    userId: {
-        type: Types.ObjectId,
-        ref: 'User',
-        required: true,
+    {
+        timestamps: true,
     },
-    tourId: {
-        type: Types.ObjectId,
-        ref: 'Tour',
-        required: true,
-    },
-    bookingId: {
-        type: Types.ObjectId,
-        ref: 'Booking',
-        required: true,
-    },
-    discountAmount: {
-        type: Number,
-        required: true,
-    },
-    originalPrice: {
-        type: Number,
-        required: true,
-    },
-    finalPrice: {
-        type: Number,
-        required: true,
-    },
-    usedAt: {
-        type: Date,
-        default: Date.now,
-    },
-}, {
-    timestamps: true,
-});
+);
 ```
 
 **Pros:**
+
 - Highly flexible
 - Can manage global and tour-specific discounts
 - Easy to track usage per user
@@ -200,13 +215,16 @@ const discountUsageSchema = new Schema({
 - Better for analytics and reporting
 
 **Cons:**
+
 - More complex implementation
 - Requires additional queries for discount validation
 
 ---
 
 ### Option 3: Hybrid Approach (Recommended for Production)
+
 Combine both approaches:
+
 - **Simple discounts** (quick sales, tour-specific): Embedded in Tour model
 - **Complex discounts** (promotions, global campaigns): Separate Discount collection
 
@@ -215,26 +233,38 @@ Combine both approaches:
 ## Implementation Recommendations
 
 ### 1. Discount Service Methods Needed:
+
 ```typescript
 interface DiscountServicePort {
     // Validate discount code
-    validateDiscount(code: string, tourId: string, userId: string, amount: number): Promise<DiscountValidationResult>;
-    
+    validateDiscount(
+        code: string,
+        tourId: string,
+        userId: string,
+        amount: number,
+    ): Promise<DiscountValidationResult>;
+
     // Apply discount calculation
     calculateDiscount(originalPrice: number, discount: Discount): number;
-    
+
     // Track discount usage
-    recordDiscountUsage(discountId: string, userId: string, tourId: string, bookingId: string): Promise<void>;
-    
+    recordDiscountUsage(
+        discountId: string,
+        userId: string,
+        tourId: string,
+        bookingId: string,
+    ): Promise<void>;
+
     // Create discount
     createDiscount(discountData: CreateDiscountDTO): Promise<Discount>;
-    
+
     // Check if user can use discount
     canUserUseDiscount(discountId: string, userId: string): Promise<boolean>;
 }
 ```
 
 ### 2. Discount Validation Logic:
+
 ```typescript
 async validateDiscount(code: string, tourId: string, userId: string, amount: number) {
     // 1. Check if discount exists and is active
@@ -250,7 +280,9 @@ async validateDiscount(code: string, tourId: string, userId: string, amount: num
 ```
 
 ### 3. Booking Integration:
+
 When creating a booking:
+
 ```typescript
 // In booking service
 if (discountCode) {
@@ -258,19 +290,20 @@ if (discountCode) {
         discountCode,
         tourId,
         userId,
-        tour.price
+        tour.price,
     );
-    
+
     if (!discount.valid) {
         throw new AppError({ message: discount.message, statusCode: 400 });
     }
-    
+
     finalPrice = discount.finalPrice;
     discountAmount = discount.discountAmount;
 }
 ```
 
 ### 4. Discount Types to Support:
+
 1. **Percentage Discount**: 10% off, 20% off
 2. **Fixed Amount Discount**: $50 off, $100 off
 3. **Buy X Get Y**: Buy 2 tickets, get 1 free
@@ -279,6 +312,7 @@ if (discountCode) {
 6. **Seasonal Discount**: Automatic discounts during certain periods
 
 ### 5. API Endpoints Needed:
+
 ```
 POST   /api/v1/discounts                    - Create discount (admin)
 GET    /api/v1/discounts                    - List discounts (admin)
@@ -290,6 +324,7 @@ GET    /api/v1/discounts/available/:tourId   - Get available discounts for tour
 ```
 
 ### 6. Database Indexes Needed:
+
 ```typescript
 // In discountModel
 discountSchema.index({ code: 1 });
@@ -302,6 +337,7 @@ discountUsageSchema.index({ userId: 1 });
 ```
 
 ### 7. Security Considerations:
+
 - Rate limiting on discount validation endpoint
 - Prevent discount code enumeration
 - Log all discount usage attempts
@@ -312,30 +348,31 @@ discountUsageSchema.index({ userId: 1 });
 ## Recommended Implementation Order:
 
 1. **Phase 1**: Basic discount model (Option 2 - Separate Collection)
-   - Create discount model with basic fields
-   - Implement discount validation service
-   - Add discount validation endpoint
+    - Create discount model with basic fields
+    - Implement discount validation service
+    - Add discount validation endpoint
 
 2. **Phase 2**: Discount application
-   - Integrate with booking creation
-   - Track discount usage
-   - Calculate final prices
+    - Integrate with booking creation
+    - Track discount usage
+    - Calculate final prices
 
 3. **Phase 3**: Advanced features
-   - User eligibility rules
-   - Usage limits per user
-   - Complex discount types (buy-x-get-y)
+    - User eligibility rules
+    - Usage limits per user
+    - Complex discount types (buy-x-get-y)
 
 4. **Phase 4**: Admin features
-   - Discount management UI/API
-   - Analytics and reporting
-   - Bulk discount operations
+    - Discount management UI/API
+    - Analytics and reporting
+    - Bulk discount operations
 
 ---
 
 ## Example Discount Objects:
 
 ### Percentage Discount:
+
 ```json
 {
     "code": "SUMMER20",
@@ -350,6 +387,7 @@ discountUsageSchema.index({ userId: 1 });
 ```
 
 ### Fixed Amount Discount:
+
 ```json
 {
     "code": "SAVE50",
@@ -365,6 +403,7 @@ discountUsageSchema.index({ userId: 1 });
 ---
 
 ## Questions to Consider:
+
 1. Do you need automatic discounts (e.g., seasonal, early bird)?
 2. Do you need discount stacking (multiple discounts)?
 3. Do you need referral discounts?
@@ -372,4 +411,3 @@ discountUsageSchema.index({ userId: 1 });
 5. Should discounts be combinable with other offers?
 
 Based on your answers, we can refine the implementation approach.
-

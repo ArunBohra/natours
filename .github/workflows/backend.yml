@@ -11,7 +11,7 @@ defaults:
     working-directory: ./apps/backend
 
 jobs:
-  lint:
+  format-and-lint:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,6 +26,9 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Check Formatting
+        run: npm run prettier:check
 
       - name: Lint
         run: npm run lint:check
