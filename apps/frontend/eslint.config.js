@@ -9,30 +9,30 @@ import tseslint from 'typescript-eslint';
 console.log(import.meta.dirname);
 
 export default defineConfig([
-    globalIgnores(['dist']),
-    {
-        files: ['**/*.{ts,tsx}'],
-        extends: [
-            js.configs.recommended,
-            reactHooks.configs['recommended-latest'],
-            reactRefresh.configs.vite,
-            tseslint.configs.recommendedTypeChecked,
-            tseslint.configs.strictTypeChecked,
-            tseslint.configs.stylisticTypeChecked,
-        ],
-        plugins: {
-            prettier: prettierPlugin,
-        },
-        languageOptions: {
-            ecmaVersion: 2020,
-            globals: globals.browser,
-            parserOptions: {
-                project: ['./tsconfig.node.json', './tsconfig.app.json'],
-                tsconfigRootDir: import.meta.dirname,
-            },
-        },
-        rules: {
-            '@typescript-eslint/no-non-null-assertion': ['off'],
-        },
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      js.configs.recommended,
+      reactHooks.configs['recommended-latest'],
+      reactRefresh.configs.vite,
+      tseslint.configs.recommendedTypeChecked,
+      tseslint.configs.strictTypeChecked,
+      tseslint.configs.stylisticTypeChecked,
+    ],
+    plugins: {
+      prettier: prettierPlugin,
     },
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+    rules: {
+      '@typescript-eslint/no-non-null-assertion': ['off'],
+    },
+  },
 ]);

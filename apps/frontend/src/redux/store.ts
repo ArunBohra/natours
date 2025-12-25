@@ -1,10 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-// export const store = configureStore({
-//     reducer: {
-//         // Define a top-level state field named `todos`, handled by `todosReducer`
-//     },
-//     devTools: true,
-// });
+import themeReducer, { type ThemeState } from './theme/themeSlice';
 
-export const store = '';
+export interface RootState {
+  theme: ThemeState;
+}
+
+export type AppDispatch = typeof store.dispatch;
+
+export const store = configureStore({
+  reducer: {
+    theme: themeReducer,
+  },
+  devTools: true,
+});
