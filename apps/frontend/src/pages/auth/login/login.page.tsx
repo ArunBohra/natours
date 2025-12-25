@@ -1,3 +1,5 @@
+import { Link } from 'react-router';
+
 import FormBuilder, { type FormConfig } from '../../../utils/formBuilder';
 
 const LoginPage = () => {
@@ -35,9 +37,9 @@ const LoginPage = () => {
         <FormBuilder config={formConfig} />
         <p className="text-center text-sm text-gray-600 dark:text-gray-400">
           Not registered?
-          <a href="#" className="text-green-600 hover:underline dark:text-green-400">
+          <Link to="/signup" className="text-green-600 hover:underline dark:text-green-400">
             Create account
-          </a>
+          </Link>
         </p>
       </div>
     </div>

@@ -1,3 +1,5 @@
+import { Link } from 'react-router';
+
 import FormBuilder from '../../../utils/formBuilder';
 import type { FormConfig } from '../../../utils/formBuilder';
 
@@ -55,9 +57,9 @@ const SignupPage = () => {
         <FormBuilder config={formConfig} />
         <p className="text-center text-sm text-gray-600 dark:text-gray-400">
           Already have an account?{' '}
-          <a href="#" className="text-green-600 hover:underline dark:text-green-400">
+          <Link to="/login" className="text-green-600 hover:underline dark:text-green-400">
             Login
-          </a>
+          </Link>
         </p>
       </div>
     </div>
