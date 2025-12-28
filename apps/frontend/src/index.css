@@ -1,3 +1,15 @@
 @import 'tailwindcss';
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+body {
+  @apply text-gray-600 dark:text-gray-400;
+}
+
+.heading {
+  @apply text-gray-900 dark:text-white;
+}
+
+.link {
+  @apply text-green-700 dark:text-green-500;
+}

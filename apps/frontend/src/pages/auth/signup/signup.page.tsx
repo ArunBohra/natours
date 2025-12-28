@@ -53,9 +53,9 @@ const SignupPage = () => {
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100 dark:bg-gray-900">
       <div className="w-full max-w-md space-y-6 rounded-lg bg-white p-8 shadow-md dark:bg-gray-800">
-        <h2 className="text-center text-2xl font-bold text-gray-900 dark:text-white">Create an account</h2>
+        <h2 className="heading text-center text-2xl font-bold">Create an account</h2>
         <FormBuilder config={formConfig} />
-        <p className="text-center text-sm text-gray-600 dark:text-gray-400">
+        <p className="text-center text-sm">
           Already have an account?{' '}
           <Link to="/login" className="text-green-600 hover:underline dark:text-green-400">
             Login
