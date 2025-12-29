@@ -1,3 +1,5 @@
+/* eslint-disable react-refresh/only-export-components */
+import { withTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { Outlet } from 'react-router';
 
@@ -31,4 +33,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default withTranslation()(App);

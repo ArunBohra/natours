@@ -1,19 +1,22 @@
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 
 import LanguageDropdown from '../languageDropdown/LanguageDropdown';
 
-const navbarLinks = [
-  {
-    text: 'All Tours',
-    to: '/tours',
-  },
-  {
-    text: 'Upcoming Tours',
-    to: '/upcoming-tours',
-  },
-];
-
 const AfterLoginNavbar = () => {
+  const { t } = useTranslation();
+
+  const navbarLinks = [
+    {
+      text: t('all_tours'),
+      to: '/tours',
+    },
+    {
+      text: t('upcoming_tours'),
+      to: '/upcoming-tours',
+    },
+  ];
+
   return (
     <div className="flex items-center gap-6">
       <div className="flex gap-5">

@@ -10,6 +10,7 @@ body {
   @apply text-gray-900 dark:text-white;
 }
 
-.link {
+.link,
+a {
   @apply text-green-700 dark:text-green-500;
 }

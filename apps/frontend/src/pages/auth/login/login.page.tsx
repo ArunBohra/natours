@@ -1,27 +1,30 @@
+import { Trans, useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 
 import FormBuilder, { type FormConfig } from '../../../utils/formBuilder';
 
 const LoginPage = () => {
+  const { t } = useTranslation();
+
   const formConfig: FormConfig = {
     fields: [
       {
         type: 'email',
-        label: 'Your email',
+        label: t('your_email'),
         placeholder: 'name@example.com',
         name: 'email',
         required: true,
       },
       {
         type: 'password',
-        label: 'Password',
+        label: t('password'),
         placeholder: '••••••••',
         name: 'password',
         required: true,
       },
       {
         type: 'button',
-        label: 'Login',
+        label: t('login'),
         name: 'submit',
       },
     ],
@@ -33,13 +36,10 @@ const LoginPage = () => {
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100 dark:bg-gray-900">
       <div className="w-full max-w-md space-y-6 rounded-lg bg-white p-8 shadow-md dark:bg-gray-800">
-        <h2 className="heading text-2xl font-bold">Sign in to our platform</h2>
+        <h2 className="heading text-2xl font-bold">{t('sign_in_tou_our_platform')}</h2>
         <FormBuilder config={formConfig} />
         <p className="text-center text-sm">
-          Not registered?{' '}
-          <Link to="/signup" className="text-green-600 hover:underline dark:text-green-400">
-            Create account
-          </Link>
+          <Trans t={t} i18nKey="not_registered_create_account" components={[<Link to="/signup" />]} />
         </p>
       </div>
     </div>

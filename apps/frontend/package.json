@@ -11,13 +11,17 @@
     "lint:check": "eslint 'src/**/*'",
     "lint:fix": "eslint 'src/**/*' --fix",
     "prettier:check": "prettier --check .",
-    "prettier:fix": "prettier --write ."
+    "prettier:fix": "prettier --write .",
+    "lokalise:pull": "npx ts-node ./tools/lokalise/pullKeys.ts"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.10.1",
     "@tailwindcss/vite": "^4.1.17",
+    "i18next": "^25.7.3",
+    "i18next-http-backend": "^3.0.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-i18next": "^16.5.0",
     "react-redux": "^9.2.0",
     "react-router": "^7.9.6",
     "redux": "^5.0.1",
@@ -26,7 +30,7 @@
   "devDependencies": {
     "@eslint/js": "^9.39.1",
     "@trivago/prettier-plugin-sort-imports": "^6.0.0",
-    "@types/node": "^24.10.0",
+    "@types/node": "^24.10.4",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
     "@vitejs/plugin-react": "^5.1.0",
@@ -37,6 +41,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
+    "lokalise-file-exchange": "^4.0.2",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.7.1",
     "typescript": "~5.9.3",

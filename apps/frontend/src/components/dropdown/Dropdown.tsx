@@ -13,6 +13,7 @@ interface DropdownProps<T> {
 
 const Dropdown = <T,>({ isOpen, dropdownItems, selectActionFn, closeFn }: DropdownProps<T>) => {
   const visibilityClass = isOpen ? 'visible opacity-100' : 'invisible';
+  const selectedClass = 'bg-gray-300 dark:bg-gray-700';
 
   return (
     <>
@@ -22,7 +23,7 @@ const Dropdown = <T,>({ isOpen, dropdownItems, selectActionFn, closeFn }: Dropdo
       >
         {dropdownItems.map((item, index) => (
           <button
-            className="cursor-pointer px-6 py-3 transition-[background-color] duration-300 hover:bg-gray-300 dark:hover:bg-gray-700"
+            className={`cursor-pointer px-6 py-3 transition-[background-color] duration-300 hover:bg-gray-300 dark:hover:bg-gray-700 ${item.isSelected ? selectedClass : ''}`}
             key={index}
             onClick={() => {
               selectActionFn(item.value);

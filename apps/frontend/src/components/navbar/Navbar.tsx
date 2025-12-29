@@ -19,7 +19,7 @@ const Navbar: React.FC<NavbarProps> = ({ isLoggedIn }) => {
     <nav className="fixed top-0 left-0 flex w-full items-center justify-between bg-gray-200 px-12 py-5 dark:bg-gray-800">
       <img src="../../../assets/img/logos/logo-white.webp" alt="Natours" className="w-20" />
 
-      {!isLoggedIn ? <BeforeLoginNavbar /> : <AfterLoginNavbar />}
+      {isLoggedIn ? <BeforeLoginNavbar /> : <AfterLoginNavbar />}
     </nav>
   );
 };

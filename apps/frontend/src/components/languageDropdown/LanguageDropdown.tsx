@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import ChevronDown from '../../../assets/icons/chevron-down.svg?react';
 import Languages, { type LangCode } from '../../constants/languages';
@@ -12,6 +13,7 @@ const availableLanguages = Languages;
 const LanguageDropdown = () => {
   const currentLang = useAppSelector((state) => state.language.currentLang);
   const dispatch = useAppDispatch();
+  const { i18n } = useTranslation();
 
   const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
 
@@ -26,6 +28,9 @@ const LanguageDropdown = () => {
   const updateLanguage = (langCode: LangCode) => {
     dispatch(changeLanguage(langCode));
     toggleLangDropdown();
+    void (async () => {
+      await i18n.changeLanguage(langCode);
+    })();
   };
 
   const toggleLangDropdown = () => {

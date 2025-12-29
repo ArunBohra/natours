@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { type LangCode, languageCodes } from '../../constants/languages';
 
 interface LanguageItemProps {
@@ -5,10 +7,16 @@ interface LanguageItemProps {
 }
 
 const LanguageItem = ({ lang }: LanguageItemProps) => {
+  const { t } = useTranslation();
+
   return (
     <div className="flex items-center disabled:bg-gray-700">
-      <img src={`../../../assets/img/flags/${lang.toLowerCase()}.png`} alt="English" className="me-2 h-5 w-5" />
-      <span className="dark:text-white">{languageCodes[lang]}</span>
+      <img
+        src={`../../../assets/img/flags/${lang.toLowerCase()}.png`}
+        alt={t(languageCodes[lang])}
+        className="me-2 h-5 w-5"
+      />
+      <span className="dark:text-white">{t(languageCodes[lang])}</span>
     </div>
   );
 };

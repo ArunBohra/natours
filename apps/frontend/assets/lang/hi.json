@@ -1,0 +1,18 @@
+{
+  "all_tours": "सभी टूर",
+  "already_have_an_account": "क्या आपके पास पहले से खाता है? <0>लॉगिन करें</0>",
+  "arabic": "العربية",
+  "create_an_account": "खाता बनाएं",
+  "english": "English",
+  "hindi": "हिंदी",
+  "login": "लॉगिन करें",
+  "not_registered_create_account": "पंजीकरण नहीं है? <0>खाता बनाएँ</0>",
+  "password": "पासवर्ड",
+  "repeat_password": "पासवर्ड दोहराएं",
+  "sign_in_tou_our_platform": "हमारे प्लेटफॉर्म पर साइन इन करें",
+  "signup": "साइन अप करें",
+  "signup_for_newsletter": "न्यूज़लेटर के लिए साइन अप करें",
+  "upcoming_tours": "आने वाले टूर",
+  "your_email": "आपका ईमेल",
+  "your_name": "आपका नाम"
+}

@@ -1,9 +1,9 @@
-const Languages = ['EN', 'HI', 'AR'] as const;
+const Languages = ['en', 'hi', 'ar'] as const;
 
 export const languageCodes = {
-  EN: 'English',
-  HI: 'Hindi',
-  AR: 'Arabic',
+  en: 'english',
+  hi: 'hindi',
+  ar: 'arabic',
 };
 
 export type LangCode = keyof typeof languageCodes;

@@ -1,19 +1,22 @@
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 
 import LanguageDropdown from '../languageDropdown/LanguageDropdown';
 
-const navbarLinks = [
-  {
-    text: 'Login',
-    to: '/login',
-  },
-  {
-    text: 'Signup',
-    to: '/signup',
-  },
-];
-
 const BeforeLoginNavbar: React.FC = () => {
+  const { t } = useTranslation();
+
+  const navbarLinks = [
+    {
+      text: t('login'),
+      to: '/login',
+    },
+    {
+      text: t('signup'),
+      to: '/signup',
+    },
+  ];
+
   return (
     <div className="flex items-center gap-6">
       <div className="flex gap-5">
