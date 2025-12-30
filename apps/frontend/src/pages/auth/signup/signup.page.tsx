@@ -1,11 +1,12 @@
 import { Trans, useTranslation } from 'react-i18next';
-import { Link } from 'react-router';
+import { Link, useParams } from 'react-router';
 
 import FormBuilder from '../../../utils/form/formBuilder';
 import type { FormConfig } from '../../../utils/form/formBuilder';
 
 const SignupPage = () => {
   const { t } = useTranslation();
+  const { lang } = useParams();
 
   const formConfig: FormConfig = {
     fields: [
@@ -59,7 +60,7 @@ const SignupPage = () => {
         <h2 className="heading text-center text-2xl font-bold">{t('create_an_account')}</h2>
         <FormBuilder config={formConfig} />
         <p className="text-center text-sm">
-          <Trans t={t} i18nKey="already_have_an_account" components={[<Link to="/login" />]} />
+          <Trans t={t} i18nKey="already_have_an_account" components={[<Link to={`/${lang!}/login`} />]} />
         </p>
       </div>
     </div>

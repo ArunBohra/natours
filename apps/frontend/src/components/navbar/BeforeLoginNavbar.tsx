@@ -1,19 +1,20 @@
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router';
+import { Link, useParams } from 'react-router';
 
 import LanguageDropdown from '../languageDropdown/LanguageDropdown';
 
 const BeforeLoginNavbar: React.FC = () => {
   const { t } = useTranslation();
+  const { lang } = useParams();
 
   const navbarLinks = [
     {
       text: t('login'),
-      to: '/login',
+      to: `/${lang!}/login`,
     },
     {
       text: t('signup'),
-      to: '/signup',
+      to: `/${lang!}/signup`,
     },
   ];
 

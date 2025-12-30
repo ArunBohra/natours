@@ -1,10 +1,11 @@
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router';
+import { Link, useParams } from 'react-router';
 
 import LanguageDropdown from '../languageDropdown/LanguageDropdown';
 
 const AfterLoginNavbar = () => {
   const { t } = useTranslation();
+  const { lang } = useParams();
 
   const navbarLinks = [
     {
@@ -21,7 +22,7 @@ const AfterLoginNavbar = () => {
     <div className="flex items-center gap-6">
       <div className="flex gap-5">
         {navbarLinks.map((link) => (
-          <Link to={link.to} className="link" key={link.to}>
+          <Link to={`${lang!}/${link.to}`} className="link" key={link.to}>
             {link.text}
           </Link>
         ))}

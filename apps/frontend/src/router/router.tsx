@@ -1,4 +1,4 @@
-import { Navigate, createBrowserRouter } from 'react-router';
+import { createBrowserRouter } from 'react-router';
 
 import App from '../App';
 import { getNewLangUrl, getPageLang, isLanguageAvailable } from '../helpers/languages';
@@ -7,18 +7,13 @@ import SignupPage from '../pages/auth/signup/signup.page';
 
 export const router = createBrowserRouter([
   {
-    path: '/',
-    element: <Navigate to={`/${getPageLang()}`} replace />,
-  },
-  {
     path: '/:lang',
     loader: ({ params }: { params: { lang?: string } }) => {
       const lang = params.lang;
       if (!lang || !isLanguageAvailable(lang)) {
         window.location.replace(getNewLangUrl(getPageLang()));
-
-        return null;
       }
+
       return null;
     },
     Component: App,
