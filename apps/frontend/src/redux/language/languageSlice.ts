@@ -1,14 +1,13 @@
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import type { LangCode } from '../../constants/languages';
-import { getInitialLang } from './helpers';
+import { type LangCode, getPageLang } from '../../helpers/languages';
 
 export interface LanguageState {
   currentLang: LangCode;
 }
 
 const initialState: LanguageState = {
-  currentLang: getInitialLang(),
+  currentLang: getPageLang(),
 };
 
 const languageSlice = createSlice({

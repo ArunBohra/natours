@@ -1,8 +1,8 @@
 import { Trans, useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 
-import FormBuilder from '../../../utils/formBuilder';
-import type { FormConfig } from '../../../utils/formBuilder';
+import FormBuilder from '../../../utils/form/formBuilder';
+import type { FormConfig } from '../../../utils/form/formBuilder';
 
 const SignupPage = () => {
   const { t } = useTranslation();

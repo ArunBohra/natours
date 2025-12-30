@@ -1,7 +1,7 @@
 import { Trans, useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 
-import FormBuilder, { type FormConfig } from '../../../utils/formBuilder';
+import FormBuilder, { type FormConfig } from '../../../utils/form/formBuilder';
 
 const LoginPage = () => {
   const { t } = useTranslation();

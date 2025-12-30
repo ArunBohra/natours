@@ -36,7 +36,10 @@ const FormBuilder: React.FC<{ config: FormConfig }> = ({ config }) => {
             return (
               <div key={index}>
                 {field.label && (
-                  <label htmlFor={field.name} className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                  <label
+                    htmlFor={field.name}
+                    className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >
                     {field.label}
                   </label>
                 )}
@@ -58,7 +61,7 @@ const FormBuilder: React.FC<{ config: FormConfig }> = ({ config }) => {
                   className="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
                 />
                 {field.label && (
-                  <label htmlFor={field.name} className="ml-2 block text-sm text-gray-900 dark:text-gray-300">
+                  <label htmlFor={field.name} className="ms-2 block text-sm text-gray-900 dark:text-gray-300">
                     {field.label}
                   </label>
                 )}

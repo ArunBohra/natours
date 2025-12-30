@@ -1,36 +1,30 @@
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router';
 
 import ChevronDown from '../../../assets/icons/chevron-down.svg?react';
-import Languages, { type LangCode } from '../../constants/languages';
-import { changeLanguage } from '../../redux/language/languageSlice';
-import { useAppDispatch, useAppSelector } from '../../redux/store';
+import Languages, { type LangCode, getNewLangUrl } from '../../helpers/languages';
+import { useAppSelector } from '../../redux/store';
 import Dropdown from '../dropdown/Dropdown';
 import LanguageItem from './LanguageItem';
 
-const availableLanguages = Languages;
-
 const LanguageDropdown = () => {
   const currentLang = useAppSelector((state) => state.language.currentLang);
-  const dispatch = useAppDispatch();
-  const { i18n } = useTranslation();
+  const navigate = useNavigate();
 
   const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
 
-  const langDropdownItems = availableLanguages
-    .map((lang) => ({ element: <LanguageItem lang={lang} key={lang} />, lang }))
-    .map((item) => ({
+  const langDropdownItems = Languages.map((lang) => ({ element: <LanguageItem lang={lang} key={lang} />, lang })).map(
+    (item) => ({
       element: item.element,
       value: item.lang,
       isSelected: item.lang === currentLang,
-    }));
+    }),
+  );
 
   const updateLanguage = (langCode: LangCode) => {
-    dispatch(changeLanguage(langCode));
+    const newPath = getNewLangUrl(langCode);
     toggleLangDropdown();
-    void (async () => {
-      await i18n.changeLanguage(langCode);
-    })();
+    void navigate(newPath);
   };
 
   const toggleLangDropdown = () => {

@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-import { type LangCode, languageCodes } from '../../constants/languages';
+import { type LangCode, languageCodes } from '../../helpers/languages';
 
 interface LanguageItemProps {
   lang: LangCode;
